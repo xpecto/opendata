@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- Creator xpecto AG, Harald Elsperger, xpecto.com -->
-<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/investments/v1"
-		   xmlns="https://xpecto.com/opendata/schemas/investments/v1"
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/investments/v2"
+		   xmlns="https://xpecto.com/opendata/schemas/investments/v2"
 		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
 	
@@ -189,7 +189,7 @@
 			<xs:element name="validfrom" type="xs:date" />
 			<xs:element name="validuntil" type="xs:date" />
 			<xs:element name="issuer" type="string" />
-			<xs:element name="verified" type="identservicetype" />
+			<xs:element name="verified" type="identservicetype" minOccurs="0"/>
 			<xs:element name="submitted" type="xs:dateTime">
 				<xs:annotation>
 					<xs:documentation>timestamp from ident-service</xs:documentation>
@@ -267,24 +267,21 @@
 			<xs:element name="birthplace" type="string" minOccurs="0" />
 			<xs:element name="birthcountry" type="string" minOccurs="0" />
 			<xs:element name="position" type="string" minOccurs="0" />
-			<xs:element name="email" type="string" minOccurs="0" />
+
 			<xs:element name="emailpriv" type="string">
 				<xs:annotation>
 					<xs:documentation>main, private mailaddress for person, used as userid if contract.customer.userid is not specified</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mobile" type="string" minOccurs="0" />
-			<xs:element name="mobilepriv" type="string">
-				<xs:annotation>
-					<xs:documentation>main, private mobile phone for person, used for sending MTAN-Messages</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="phone1" type="string" minOccurs="0" />
-			<xs:element name="phone1priv" type="string" minOccurs="0" />
-			<xs:element name="phone2" type="string" minOccurs="0" />
-			<xs:element name="phone2priv" type="string" minOccurs="0" />
-			<xs:element name="web" type="string" minOccurs="0" />
+			<xs:element name="mobilepriv" type="string" minOccurs="0">
+			<xs:element name="phonepriv" type="string" minOccurs="0" maxOccurs="2" />
 			<xs:element name="webpriv" type="string" minOccurs="0" />
+
+			<xs:element name="email" type="string" minOccurs="0" />
+			<xs:element name="mobile" type="string" minOccurs="0" />
+			<xs:element name="phone" type="string" minOccurs="0" maxOccurs="2" />
+			<xs:element name="web" type="string" minOccurs="0" />
+					
 			<xs:element name="maritalstatus" type="martialstatus" minOccurs="0"  />
 			<xs:element name="education" type="string" minOccurs="0" />
 			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>
@@ -346,8 +343,8 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="person" type="person"/>
-			<xs:element name="event" type="event" maxOccurs="unbounded" />
-			<xs:element name="property" type="property" maxOccurs="unbounded" />
+			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -410,12 +407,12 @@
 						<xs:documentation>date of acceptance by issuer</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="start" type="xs:date">
+				<xs:element name="start" type="xs:date" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>start of investment (e.g. start of dividend-period)</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="end" type="xs:date">
+				<xs:element name="end" type="xs:date" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>end of investment</xs:documentation>
 					</xs:annotation>
