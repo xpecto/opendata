@@ -454,7 +454,7 @@
 		<xs:element name="experience" type="rangeofexperience">
 	</xs:complexType>
 
-	<xs:simpleType name="investmenttype">
+	<xs:simpleType name="servicetype">
 		<xs:restriction base="xs:unsignedByte">
 			<xs:enumeration value="0" id="independent"/>
 			<xs:enumeration value="1" id="investment_consultancy"/>
