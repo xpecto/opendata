@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<investments xmlns="https://xpecto.com/opendata/schemas/investments/v1">
+	<contract key="20__XpectoWohnzins__100134" modified="2016-10-12T10:49:39">
+		<product>XpectoWohnzins</product>
+		<contractno>10134</contractno>
+		<affiliate>VP001</affiliate>
+		<agio>50.00</agio>
+		<agiodiscountaf>20.00</agiodiscountaf>
+		<share>1000.00</share>
+		<interestrate>4.73</interestrate>
+		<signed>2016-09-29</signed>
+		<accepted>2016-10-06</accepted>
+		<start>2016-11-01</start>
+		<end>2022-12-31</end>
+		<customer key="10__xpecto__WW200250" modified="2016-10-05T17:01:01">
+			<pwd>$algo$hash</pwd>
+			<userid>Jimmy1234</userid>
+			<person key="B0__xpecto__X000001F9" modified="2016-10-14T11:22:51">
+				<type>0</type>
+				<salutation>Herr</salutation>
+				<title>Prof.</title>
+				<forename>Harald</forename>
+				<surname>Elsperger</surname>
+				<street>Benzstr. 13</street>
+				<zip>84030</zip>
+				<city>Landshut</city>
+				<country>DE</country>
+				<birthdate>1930-03-20</birthdate>
+				<birthplace>Straubing</birthplace>
+				<birthcountry>DE</birthcountry>
+				<position>Vorstand</position>
+				<emailpriv>harald.elsperger@xpecto.com</emailpriv>
+				<mobilepriv>+49 176 20000000</mobilepriv>
+				<phone1>+49 871 276710</phone1>
+				<maritalstatus>1</maritalstatus>
+				<education>Stu</education>
+				<bankaccount key="B2__xpecto__X000000BF" modified="2016-09-29T17:45:37">
+					<accountholder>Harald Elsperger</accountholder>
+					<bic>GENODEF1ERG</bic>
+					<iban>DE65743690880000111111</iban>
+					<bank>Raiffeisenbank Landshut</bank>
+					<country>DE</country>
+					<currency>EUR</currency>
+					<sharedaccount>false</sharedaccount>
+					<type>0</type>
+					<validfrom>2000-01-01</validfrom>
+					<usage key="19__xpecto__X000000BF" modified="1900-01-01T01:01:01+01:00">
+						<types>
+							<type>0</type>
+							<type>8</type>
+							<type>9</type>
+						</types>
+						<mandate>
+							<signed>2012-01-01</signed>
+							<reference>reference1</reference>
+						</mandate>
+					</usage>
+				</bankaccount>
+				<identification key="B3__xpecto__X00000514" modified="2016-09-29T17:45:37">
+					<documentnr>LFR9999PR</documentnr>
+					<documenttype>1</documenttype>
+					<validfrom>2010-11-12</validfrom>
+					<validuntil>2020-11-11</validuntil>
+					<issuer>Stadt Landshut</issuer>
+					<verified>5</verified>
+					<submitted>2016-09-29T00:00:00</submitted>
+					<code>3N6ASDFASADFZFZE</code>
+				</identification>
+			</person>
+			<event key="72__xpecto__J20007782" modified="2016-09-29T17:45:37">
+				<date>2016-09-29T00:00:00</date>
+				<category>Info23aKWG</category>
+				<subject>Kundeninformation zur Zugehörigkeit zu einer Sicherungseinrichtung</subject>
+				<file>J20007782_Paragraph23a_WW200250.pdf</file>
+				<public>true</public>
+			</event>
+			<property key="72__xpecto__X00000951" modified="2016-09-29T17:30:26">
+				<date>2016-09-29T00:00:00</date>
+				<property>AusschlussUSA</property>
+				<public>false</public>
+				<comment>Web, IP-Addresse:212.102.160.2</comment>
+			</property>
+			<property key="72__xpecto__X00000952" modified="2016-09-29T17:30:26">
+				<date>2016-09-29T00:00:00</date>
+				<property>AGB</property>
+				<public>false</public>
+				<validfrom>2017-01-01</validfrom>
+				<validuntil>2017-12-31</validuntil>
+				<comment>Web, IP-Addresse:212.102.160.2</comment>
+			</property>
+		</customer>
+		<event key="70__XpectoWohnzins__J00000F30" modified="2016-09-29T17:45:34">
+			<date>2016-09-29T00:00:00</date>
+			<category>Zeichnungsschein</category>
+			<subject>Zeichnungsschein Einsiedel Wohnzins</subject>
+			<file>J00000F30_ZeichnungsscheinEinsiedel_100134.pdf</file>
+			<public>true</public>
+		</event>
+		<property key="70__XpectoWohnzins__X0000017A" modified="2016-09-29T17:45:26">
+			<date>2016-09-29T00:00:00</date>
+			<property>Broschuere</property>
+			<public>false</public>
+			<comment>Web, IP-Addresse:212.102.160.2</comment>
+		</property>
+	</contract>
+</investments>
