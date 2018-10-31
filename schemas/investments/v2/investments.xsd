@@ -349,7 +349,8 @@
 					<xs:documentation>userid, for webportal, emailpriv is used if omitted or empty</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="investmentsurvey" minOccurs="0">
+			<xs:element name="person" type="person"/>
+			<xs:element name="investmentsurvey" minOccurs="0" maxOccurs="unbounded">
 				<xsd:complexType>
 					<xs:sequence>
 						<xs:element name="date" type="xs:date" />
@@ -360,7 +361,6 @@
 					<xs:sequence>
 				<xsd:complexType>
 			</xs:element>
-			<xs:element name="person" type="person"/>
 			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
