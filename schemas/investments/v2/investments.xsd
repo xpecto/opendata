@@ -280,7 +280,7 @@
 					<xs:documentation>main, private mailaddress for person, used as userid if contract.customer.userid is not specified</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="mobilepriv" type="string" minOccurs="0">
+			<xs:element name="mobilepriv" type="string" minOccurs="0"/>
 			<xs:element name="phonepriv" type="string" minOccurs="0" maxOccurs="2" />
 			<xs:element name="webpriv" type="string" minOccurs="0" />
 
@@ -351,15 +351,15 @@
 			</xs:element>
 			<xs:element name="person" type="person"/>
 			<xs:element name="investmentsurvey" minOccurs="0" maxOccurs="unbounded">
-				<xsd:complexType>
+				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="date" type="xs:date" />
 						<xs:element name="investmentexperience" type="investmentexperience" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element name="serviceexperience" type="serviceexperience" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element name="avgyearlytransactions" type="xs:integer" minOccurs="0" />
 						<xs:element name="avgtransactionvalue" type="xs:integer" minOccurs="0" />
-					<xs:sequence>
-				<xsd:complexType>
+					</xs:sequence>
+				</xs:complexType>
 			</xs:element>
 			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
@@ -444,14 +444,18 @@
 	</xs:complexType>
 
 	<xs:complexType name="investmentexperience">
-		<xs:element name="type" type="investmenttype" />
-		<xs:element name="knowledge" type="boolean" />
-		<xs:element name="experience" type="rangeofexperience">
+		<xs:sequence>
+			<xs:element name="type" type="investmenttype" />
+			<xs:element name="knowledge" type="xs:boolean" />
+			<xs:element name="experience" type="rangeofexperience"/>
+		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="serviceexperience">
-		<xs:element name="type" type="servicetype" />
-		<xs:element name="experience" type="rangeofexperience">
+		<xs:sequence>
+			<xs:element name="type" type="servicetype" />
+			<xs:element name="experience" type="rangeofexperience"/>
+		</xs:sequence>
 	</xs:complexType>
 
 	<xs:simpleType name="servicetype">
@@ -469,21 +473,21 @@
 			<xs:enumeration value="2" id="money_market_funds"/>
 			<xs:enumeration value="3" id="bond"/>
 			<xs:enumeration value="4" id="share"/>
-            <xs:enumeration value="5" id="certificate"/>
-            <xs:enumeration value="6" id="reverse_convertible_bond"/>
-            <xs:enumeration value="7" id="alternative_investment_fund"/>
-            <xs:enumeration value="8" id="warrants"/>
-            <xs:enumeration value="9" id="emerging_market_bonds"/>
-            <xs:enumeration value="10" id="hedge_fund"/>
-            <xs:enumeration value="11" id="futures_trading"/>
-            <xs:enumeration value="12" id="participation_right"/>
-            <xs:enumeration value="13" id="participation_paper"/>
-            <xs:enumeration value="14" id="operative _participation_in_a_limited_partnership"/>
-            <xs:enumeration value="15" id="participation_in_a_limited_partnership"/>
-            <xs:enumeration value="16" id="contract_for_difference"/>
-            <xs:enumeration value="17" id="crypto_currency"/>
-            <xs:enumeration value="18" id="unsecured_junior_debt"/>
-            <xs:enumeration value="19" id="private_equity"/>
+			<xs:enumeration value="5" id="certificate"/>
+			<xs:enumeration value="6" id="reverse_convertible_bond"/>
+			<xs:enumeration value="7" id="alternative_investment_fund"/>
+			<xs:enumeration value="8" id="warrants"/>
+			<xs:enumeration value="9" id="emerging_market_bonds"/>
+			<xs:enumeration value="10" id="hedge_fund"/>
+			<xs:enumeration value="11" id="futures_trading"/>
+			<xs:enumeration value="12" id="participation_right"/>
+			<xs:enumeration value="13" id="participation_paper"/>
+			<xs:enumeration value="14" id="operative_participation_in_a_limited_partnership"/>
+			<xs:enumeration value="15" id="participation_in_a_limited_partnership"/>
+			<xs:enumeration value="16" id="contract_for_difference"/>
+			<xs:enumeration value="17" id="crypto_currency"/>
+			<xs:enumeration value="18" id="unsecured_junior_debt"/>
+			<xs:enumeration value="19" id="private_equity"/>
 		</xs:restriction>
 	</xs:simpleType>
 
