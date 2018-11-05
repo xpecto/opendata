@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<investments xmlns="https://xpecto.com/opendata/schemas/investments/v1">
+<investments xmlns="https://xpecto.com/opendata/schemas/investments/v2">
 	<contract key="20__XpectoWohnzins__100134" modified="2016-10-12T10:49:39">
 		<product>XpectoWohnzins</product>
 		<contractno>10134</contractno>
@@ -31,7 +31,7 @@
 				<position>Vorstand</position>
 				<emailpriv>harald.elsperger@xpecto.com</emailpriv>
 				<mobilepriv>+49 176 20000000</mobilepriv>
-				<phone1>+49 871 276710</phone1>
+				<phone>+49 871 276710</phone>
 				<maritalstatus>1</maritalstatus>
 				<education>Stu</education>
 				<bankaccount key="B2__xpecto__X000000BF" modified="2016-09-29T17:45:37">
