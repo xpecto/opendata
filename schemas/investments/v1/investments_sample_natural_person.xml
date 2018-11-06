@@ -1,8 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <investments xmlns="https://xpecto.com/opendata/schemas/investments/v1">
 	<contract key="20__XpectoWohnzins__100134" modified="2016-10-12T10:49:39">
 		<product>XpectoWohnzins</product>
-		<contractno>10134</contractno>
+		<contractno>100134</contractno>
 		<affiliate>VP001</affiliate>
 		<agio>50.00</agio>
 		<agiodiscountaf>20.00</agiodiscountaf>

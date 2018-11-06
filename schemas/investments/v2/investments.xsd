@@ -146,8 +146,6 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="type" type="bankaccounttype"/>
-			<xs:element name="validfrom" type="xs:date" minOccurs="0" />
-			<xs:element name="validuntil" type="xs:date" minOccurs="0" />
 			<xs:element name="usage">
 				<xs:annotation>
 					<xs:documentation>how the bankaccount should be used by the issuer in reference to this contract</xs:documentation>
@@ -179,6 +177,8 @@
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="validfrom" type="xs:date" minOccurs="0" />
+						<xs:element name="validuntil" type="xs:date" minOccurs="0" />
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -436,8 +436,8 @@
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="customer" type="customer"/>
-				<xs:element name="event" type="event" maxOccurs="unbounded" />
-				<xs:element name="property" type="property" maxOccurs="unbounded" />
+				<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
 			</xs:sequence>
 			<xs:attribute name="key" type="key" use="required" />
 			<xs:attribute name="modified" type="xs:dateTime" use="required" />
