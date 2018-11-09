@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Creator xpecto AG, Thomas Grötzinger, xpecto.com -->
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/general/v2"
+		   xmlns="https://xpecto.com/opendata/schemas/general/v2"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified">
+	
+	<xs:simpleType name="string">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="key">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[a-zA-Z0-9_]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="country">
+		<xs:annotation>
+			<xs:documentation>2 letter iso-code for country e.g. DE for germany</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="2"/>
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="decimalunsigned">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="persontype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="natural_person"/>
+			<xs:enumeration value="1" id="legal_person"/>
+			<xs:enumeration value="2" id="marriage"/>
+			<xs:enumeration value="3" id="inheritance"/>
+			<xs:enumeration value="9" id="other_org"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="personroletype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="50" id="spouse"/>
+			<xs:enumeration value="51" id="shareholder"/>
+			<xs:enumeration value="52" id="heritage"/>
+			<xs:enumeration value="60" id="controlling_person"/>
+			<xs:enumeration value="70" id="director"/>
+			<xs:enumeration value="71" id="ceo"/>
+			<xs:enumeration value="72" id="board_chairman"/>
+			<xs:enumeration value="73" id="board_member"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="martialstatus">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="single"/>
+			<xs:enumeration value="1" id="married"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="bankaccounttype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="bankaccount"/>
+			<xs:enumeration value="1" id="investmentaccount"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="identdocumenttype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="idcard"/>
+			<xs:enumeration value="1" id="passport"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="identservicetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="investmentprovider"/>
+			<xs:enumeration value="1" id="affiliate"/>
+			<xs:enumeration value="2" id="postident"/>
+			<xs:enumeration value="3" id="bank"/>
+			<xs:enumeration value="4" id="notary"/>
+			<xs:enumeration value="5" id="onlineident"/>
+			<xs:enumeration value="15" id="invalid"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="bankaccountusagetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="invest">
+				<xs:annotation>
+					<xs:documentation>used for direct debit if mandate is supplied</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8" id="dividends_interest"/>
+			<xs:enumeration value="9" id="divest"/>
+			<xs:enumeration value="10" id="commission"/>
+			<xs:enumeration value="16" id="securitiestransfer"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="currency">
+		<xs:annotation>
+			<xs:documentation>3 letter iso-code for currency e.g. USD for US-Dollar</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="3"/>
+			<xs:maxLength value="3"/>
+			<xs:pattern value="[A-Z]{3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="bankaccount">
+		<xs:sequence>
+			<xs:element name="accountholder" type="string" />
+			<xs:element name="bic" type="string" />
+			<xs:element name="iban" type="string" />
+			<xs:element name="bank" type="string" />
+			<xs:element name="country" type="country" />
+			<xs:element name="currency" type="currency" />
+			<xs:element name="sharedaccount" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true if account is shared by multiple persons, e.g. a couple</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="type" type="bankaccounttype"/>
+			<xs:element name="usage" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>how the bankaccount should be used by the issuer in reference to this contract</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="types">
+							<xs:annotation>
+								<xs:documentation>there needs to be at least one usage type for every bankaccount, e.g. 8 for dividends</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="type" type="bankaccountusagetype" minOccurs="1" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="mandate" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>mandate information for direct debit if signed</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="signed" type="xs:date"/>
+									<xs:element name="reference" type="string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>reference for mandate, contractno is used if empty</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="validfrom" type="xs:date" minOccurs="0" />
+						<xs:element name="validuntil" type="xs:date" minOccurs="0" />
+					</xs:sequence>
+					<xs:attribute name="key" type="key" use="required" />
+					<xs:attribute name="modified" type="xs:dateTime" use="required" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="identification">
+		<xs:sequence>
+			<xs:element name="documentnr" type="string" />
+			<xs:element name="documenttype" type="identdocumenttype" />
+			<xs:element name="validfrom" type="xs:date" />
+			<xs:element name="validuntil" type="xs:date" />
+			<xs:element name="issuer" type="string" />
+			<xs:element name="verified" type="identservicetype" minOccurs="0"/>
+			<xs:element name="submitted" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>timestamp from ident-service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="string">
+				<xs:annotation>
+					<xs:documentation>code or transaction from ident-service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="event">
+		<xs:sequence>
+			<xs:element name="date" type="xs:dateTime" />
+			<xs:element name="category" type="string" >
+				<xs:annotation>
+					<xs:documentation>category or class of event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subject" type="string" minOccurs="0"/>
+			<xs:element name="file" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>filename without path, every file needs to be included with this filename into zip-archive</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="public" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>customer is able to see event in webportal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="comment" type="string" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="property">
+		<xs:sequence>
+			<xs:element name="date" type="xs:dateTime" />
+			<xs:element name="property" type="string" >
+				<xs:annotation>
+					<xs:documentation>name of property e.g. "AGB" for acknowledging AGB during signing process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="public" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>customer is able to see property in webportal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validfrom" type="xs:date" minOccurs="0" />
+			<xs:element name="validuntil" type="xs:date" minOccurs="0" />
+			<xs:element name="comment" type="string" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+	
+	<xs:complexType name="person">
+		<xs:sequence>
+			<xs:element name="type" type="persontype"/>
+			<xs:element name="companyname" type="string" minOccurs="0" />
+			<xs:element name="salutation" type="string" />
+			<xs:element name="title" type="string" minOccurs="0" />
+			<xs:element name="forename" type="string" />
+			<xs:element name="surname" type="string" />
+			<xs:element name="street" type="string" />
+			<xs:element name="zip" type="string" />
+			<xs:element name="city" type="string" />
+			<xs:element name="country" type="country" />
+			<xs:element name="birthdate" type="xs:date" minOccurs="0" />
+			<xs:element name="birthplace" type="string" minOccurs="0" />
+			<xs:element name="birthcountry" type="string" minOccurs="0" />
+			<xs:element name="position" type="string" minOccurs="0" />
+
+			<xs:element name="emailpriv" type="string">
+				<xs:annotation>
+					<xs:documentation>main, private mailaddress for person, used as userid if contract.customer.userid is not specified</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobilepriv" type="string" minOccurs="0"/>
+			<xs:element name="phonepriv" type="string" minOccurs="0" maxOccurs="2" />
+			<xs:element name="webpriv" type="string" minOccurs="0" />
+
+			<xs:element name="email" type="string" minOccurs="0" />
+			<xs:element name="mobile" type="string" minOccurs="0" />
+			<xs:element name="phone" type="string" minOccurs="0" maxOccurs="2" />
+			<xs:element name="web" type="string" minOccurs="0" />
+					
+			<xs:element name="maritalstatus" type="martialstatus" minOccurs="0"  />
+			<xs:element name="education" type="string" minOccurs="0" />
+			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>
+			<xs:element name="identification" minOccurs="0" maxOccurs="unbounded" type="identification"/>
+			<xs:element name="subperson" minOccurs="0" maxOccurs="unbounded" >
+				<xs:annotation>
+					<xs:documentation>
+						if a customer consists of multiple persons you should supply subpersons including their role
+						e.g. a marriage consists of two spouses 
+						or a company has a director and a controlling_person
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="role" type="personroletype" />
+						<xs:element name="person" type="person" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="investmentexperience">
+		<xs:sequence>
+			<xs:element name="type" type="investmenttype" />
+			<xs:element name="knowledge" type="xs:boolean" />
+			<xs:element name="experience" type="rangeofexperience"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="serviceexperience">
+		<xs:sequence>
+			<xs:element name="type" type="servicetype" />
+			<xs:element name="experience" type="rangeofexperience"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="servicetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="independent"/>
+			<xs:enumeration value="1" id="investment_consultancy"/>
+			<xs:enumeration value="2" id="investment_management"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="investmenttype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="investment_fund"/>
+			<xs:enumeration value="1" id="government_bonds"/>
+			<xs:enumeration value="2" id="money_market_funds"/>
+			<xs:enumeration value="3" id="bond"/>
+			<xs:enumeration value="4" id="share"/>
+			<xs:enumeration value="5" id="certificate"/>
+			<xs:enumeration value="6" id="reverse_convertible_bond"/>
+			<xs:enumeration value="7" id="alternative_investment_fund"/>
+			<xs:enumeration value="8" id="warrants"/>
+			<xs:enumeration value="9" id="emerging_market_bonds"/>
+			<xs:enumeration value="10" id="hedge_fund"/>
+			<xs:enumeration value="11" id="futures_trading"/>
+			<xs:enumeration value="12" id="participation_right"/>
+			<xs:enumeration value="13" id="participation_paper"/>
+			<xs:enumeration value="14" id="operative_participation_in_a_limited_partnership"/>
+			<xs:enumeration value="15" id="participation_in_a_limited_partnership"/>
+			<xs:enumeration value="16" id="contract_for_difference"/>
+			<xs:enumeration value="17" id="crypto_currency"/>
+			<xs:enumeration value="18" id="unsecured_junior_debt"/>
+			<xs:enumeration value="19" id="private_equity"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="rangeofexperience">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="lower than 3 years"/>
+			<xs:enumeration value="3 to 5 years"/>
+			<xs:enumeration value="greater than 5 years"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
+
