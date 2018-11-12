@@ -4,9 +4,8 @@
 		   xmlns="https://xpecto.com/opendata/schemas/investments/v2"
 		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
-	
-	<!--<xs:include schemaLocation="https://xpecto.com/opendata/schemas/person/v2/person.xsd"/>-->
-	<xs:include schemaLocation="https://github.com/xpecto/opendata/blob/v2/schemas/person/v2/person.xsd"/>
+
+	<xs:include schemaLocation="https://raw.githubusercontent.com/xpecto/opendata/v2/schemas/person/v2/person.xsd"/>
 
 	<xs:element name="investments">
 		<xs:complexType>
