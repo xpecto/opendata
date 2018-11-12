@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Creator xpecto AG, Thomas Grötzinger, xpecto.com -->
-<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/general/v2"
-		   xmlns="https://xpecto.com/opendata/schemas/general/v2"
-		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
 	
 	<xs:simpleType name="string">
