@@ -36,57 +36,57 @@
 					</xs:element>
 				</xs:sequence>
 			</xs:choice>
-			<xs:element name="date" type="xs:dateTime">
+			<xs:element name="date" type="xs:date">
 				<xs:annotation>
 					<xs:documentation>date when the compliance was approved </xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="status" type="compliancestatus">
-					<xs:annotation>
-						<xs:documentation>compliance status</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="processingstep" type="complianceprocessstep">
-					<xs:annotation>
-						<xs:documentation>the processstep of the compliance validation</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="comment" type="string" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>comment of the compliance</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="customercontroll" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>value of the customercheck</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="customercompliance" type="customercompliance" maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="contractcontroll" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>value of the contractcheck</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="contractcompliance" type="contractcompliance" maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="aecontroll" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>value of the ae controll</xs:documentation>
-					</xs:annotation>
-					<xs:complexType>
-						<xs:sequence>
-							<xs:element name="investmentsurveycompliance" type="investmentsurveycompliance" maxOccurs="unbounded" />
-						</xs:sequence>
-					</xs:complexType>
-				</xs:element>
-			</xs:sequence>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="compliancestatus">
+				<xs:annotation>
+					<xs:documentation>compliance status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="processingstep" type="complianceprocessstep">
+				<xs:annotation>
+					<xs:documentation>the processstep of the compliance validation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="comment" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>comment of the compliance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customercontroll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>value of the customercheck</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="customercompliance" type="customercompliance" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contractcontroll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>value of the contractcheck</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="contractcompliance" type="contractcompliance" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="investmentsurveycontroll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>value of the ae controll</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="investmentsurveycompliance" type="investmentsurveycompliance" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
 	</xs:complexType>
@@ -117,7 +117,7 @@
 	<xs:complexType name="customercompliance">
 		<xs:sequence>
 			<xs:element name="type" type="customercompliancetype" />
-			<xs:element name="proved" tpye="xs:boolean" />
+			<xs:element name="proved" type="xs:boolean" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -141,7 +141,7 @@
 	<xs:complexType name="contractcompliance">
 		<xs:sequence>
 			<xs:element name="type" type="contractcompliancetype" />
-			<xs:element name="proved" tpye="xs:boolean" />
+			<xs:element name="proved" type="xs:boolean" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -156,7 +156,7 @@
 	<xs:complexType name="investmentsurveycompliance">
 		<xs:sequence>
 			<xs:element name="type" type="investementsurveycompliancetype" />
-			<xs:element name="proved" tpye="xs:boolean" />
+			<xs:element name="proved" type="xs:boolean" />
 		</xs:sequence>
 	</xs:complexType>
 
@@ -172,6 +172,14 @@
 	<xs:simpleType name="string">
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="key">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[a-zA-Z0-9_\+]+"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
