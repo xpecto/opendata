@@ -117,7 +117,7 @@
 
 	<xs:complexType name="xpectofield">
 		<xs:annotation>
-			<xs:documentation>additional data, wich can be added and is mapped to the fields from xpecto</xs:documentation>
+			<xs:documentation>additional data, which can be added and is mapped to the fields from xpecto</xs:documentation>
 		</xs:annotation>
 		<xs:simpleContent>
 			<xs:extension base="xs:string">
