@@ -119,10 +119,11 @@
 		<xs:annotation>
 			<xs:documentation>additional data, wich can be added and is mapped to the fields from xpecto</xs:documentation>
 		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="value" type="string"/>
-		</xs:sequence>
-		<xs:attribute name="fieldid" type="string" use="required" />
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="fieldid" type="string" use="required" />
+			</xs:extension>
+		</xs:simpleContent>
 	</xs:complexType>
 
 	<xs:complexType name="bankaccount">
