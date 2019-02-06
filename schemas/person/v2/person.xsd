@@ -13,7 +13,7 @@
 		<xs:restriction base="xs:string">
 			<xs:minLength value="5"/>
 			<xs:maxLength value="50"/>
-			<xs:pattern value="[a-zA-Z0-9_]+"/>
+			<xs:pattern value="[a-zA-Z0-9_+]+"/>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -115,6 +115,16 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+	<xs:complexType name="xpectofield">
+		<xs:annotation>
+			<xs:documentation>additional data, wich can be added and is mapped to the fields from xpecto</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value" type="string"/>
+		</xs:sequence>
+		<xs:attribute name="fieldid" type="string" use="required" />
+	</xs:complexType>
+
 	<xs:complexType name="bankaccount">
 		<xs:sequence>
 			<xs:element name="accountholder" type="string" />
@@ -190,6 +200,7 @@
 					<xs:documentation>code or transaction from ident-service</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -215,6 +226,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="comment" type="string" minOccurs="0" />
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -236,6 +248,7 @@
 			<xs:element name="validfrom" type="xs:date" minOccurs="0" />
 			<xs:element name="validuntil" type="xs:date" minOccurs="0" />
 			<xs:element name="comment" type="string" minOccurs="0" />
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -274,6 +287,7 @@
 					
 			<xs:element name="maritalstatus" type="martialstatus" minOccurs="0"  />
 			<xs:element name="education" type="string" minOccurs="0" />
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>
 			<xs:element name="identification" minOccurs="0" maxOccurs="unbounded" type="identification"/>
 			<xs:element name="subperson" minOccurs="0" maxOccurs="unbounded" >

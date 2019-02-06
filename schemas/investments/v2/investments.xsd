@@ -58,6 +58,7 @@
 					<xs:documentation>userid, for webportal, emailpriv is used if omitted or empty</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="person" type="person"/>
 			<xs:element name="investmentsurvey" minOccurs="0" maxOccurs="unbounded">
 				<xs:complexType>
@@ -67,6 +68,7 @@
 						<xs:element name="serviceexperience" type="serviceexperience" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element name="avgyearlytransactions" type="xs:integer" minOccurs="0" />
 						<xs:element name="avgtransactionvalue" type="xs:integer" minOccurs="0" />
+						<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -146,6 +148,7 @@
 						<xs:documentation>end of investment</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 				<xs:element name="customer" type="customer"/>
 				<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 				<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />

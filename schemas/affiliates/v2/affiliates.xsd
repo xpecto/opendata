@@ -52,6 +52,7 @@
 					<xs:documentation>userid, for webportal, emailpriv is used if omitted or empty</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="person" type="person"/>
 			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
