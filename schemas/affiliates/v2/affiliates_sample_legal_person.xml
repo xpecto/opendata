@@ -29,11 +29,11 @@
 				<currency>EUR</currency>
 				<sharedaccount>false</sharedaccount>
 				<type>0</type>
-				<validfrom>2000-01-01</validfrom>
 				<usage key="19__xpecto__X000000BF" modified="1900-01-01T01:01:01+01:00">
 					<types>
 						<type>10</type>
 					</types>
+					<validfrom>2000-01-01</validfrom>
 				</usage>
 			</bankaccount>
 			<identification key="B3__xpecto__X00000514" modified="2016-09-29T17:45:37">
