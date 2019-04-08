@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Version 20181107 -->
+<!-- Creator xpecto AG, Harald Elsperger, xpecto.com -->
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/affiliates/v2"
+		   xmlns="https://xpecto.com/opendata/schemas/affiliates/v2"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified">
+
+	<xs:include schemaLocation="https://raw.githubusercontent.com/xpecto/opendata/v2/schemas/person/v2/person.xsd"/>
+
+	<xs:element name="affiliates">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="affiliate" maxOccurs="unbounded" type="affiliate" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+	<xs:complexType name="affiliate">
+		<xs:sequence>
+			<xs:element name="pwd" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						password for webportal
+
+						stored as password hash, starting with $HASHMODE
+						should be BCRYPT, MD5 possible but weak
+
+						* java:
+						import org.mindrot.jbcrypt.BCrypt;
+						String plaintextPwd = "test12354";
+						String hashed = BCrypt.hashpw(plaintextPwd, BCrypt.gensalt());
+
+						String encryptedUserPwd = "$BCRYPT" + hashed;
+
+						// test12354 	=> encryptedUserPwd  = "$BCRYPT$2a$10$HePP0cvCl.tFrijNdtjtRu0RrzuP0zEEXADobxKviTCOS0iJuuLfu"
+						// pwd 			=> encryptedUserPwd  = "$BCRYPT$2a$10$0bt2yDxGyLbSW6BSrQQDR.TjmVakUP3VKE2YA9OYnarpoEtCQ39x."
+						// warn: as salt changes every time, hashes can not be compared
+						// BCrypt.checkpw(plaintextPwd, hashed);
+
+						* php:
+						$plaintextPwd = "test12354";
+						$hashed = password_hash($plaintextPwd , PASSWORD_BCRYPT);
+						$encryptedUserPwd = '$BCRYPT' . $hashed
+						// test12354	=> $encryptedUserPwd = "$BCRYPT$2y$10$BT.Qy8SdfWysS9uiu5wxQ.OsSHF8QPYPoXGme2VgL0XH6p4jUlzhO"
+						// password_verify($plaintextPwd , $hashed)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="userid" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>userid, for webportal, emailpriv is used if omitted or empty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="person" type="person"/>
+			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+	
+</xs:schema>

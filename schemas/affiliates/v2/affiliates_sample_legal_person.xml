@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<affiliates xmlns="https://xpecto.com/opendata/schemas/affiliates/v2">
+	<affiliate key="50__xpecto__WW200250" modified="2016-10-05T17:01:01">
+		<pwd>$algo$hash</pwd>
+		<userid>Jimmy1234</userid>
+		<person key="B0__xpecto__X000001F9" modified="2016-10-14T11:22:51">
+			<type>1</type>
+			<companyname>xpecto AG</companyname>
+			<salutation>Herr</salutation>
+			<forename>Harald</forename>
+			<surname>Elsperger</surname>
+			<street>Benzstr. 13</street>
+			<zip>84030</zip>
+			<city>Landshut</city>
+			<country>DE</country>
+			<birthdate>1930-03-20</birthdate>
+			<birthplace>Straubing</birthplace>
+			<birthcountry>DE</birthcountry>
+			<position>Vorstand</position>
+			<emailpriv>harald.elsperger@xpecto.com</emailpriv>
+			<mobilepriv>+49 176 20000000</mobilepriv>
+			<phone>+49 871 276710</phone>
+			<bankaccount key="B2__xpecto__X000000BF" modified="2016-09-29T17:45:37">
+				<accountholder>Harald Elsperger</accountholder>
+				<bic>GENODEF1ERG</bic>
+				<iban>DE65743690880000111111</iban>
+				<bank>Raiffeisenbank Landshut</bank>
+				<country>DE</country>
+				<currency>EUR</currency>
+				<sharedaccount>false</sharedaccount>
+				<type>0</type>
+				<usage key="19__xpecto__X000000BF" modified="1900-01-01T01:01:01+01:00">
+					<types>
+						<type>10</type>
+					</types>
+					<validfrom>2000-01-01</validfrom>
+				</usage>
+			</bankaccount>
+			<identification key="B3__xpecto__X00000514" modified="2016-09-29T17:45:37">
+				<documentnr>LFR9999PR</documentnr>
+				<documenttype>1</documenttype>
+				<validfrom>2010-11-12</validfrom>
+				<validuntil>2020-11-11</validuntil>
+				<issuer>Stadt Landshut</issuer>
+				<verified>5</verified>
+				<submitted>2016-09-29T00:00:00</submitted>
+				<code>3N6ASDFASADFZFZE</code>
+			</identification>
+		</person>
+		<event key="71__xpecto__J20007782" modified="2016-09-29T17:45:37">
+			<date>2016-09-29T00:00:00</date>
+			<category>Vertrag</category>
+			<subject>Vertriebspartnervertrag</subject>
+			<file>J20007782_WW200250.pdf</file>
+			<public>true</public>
+		</event>
+		<property key="71__xpecto__X00000952" modified="2016-09-29T17:30:26">
+			<date>2016-09-29T00:00:00</date>
+			<property>Kleinunternehmer</property>
+			<public>false</public>
+			<comment>Web, IP-Addresse:212.102.160.2</comment>
+		</property>
+	</affiliate>
+</affiliates>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<investments xmlns="https://xpecto.com/opendata/schemas/investments/v1">
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<investments xmlns="https://xpecto.com/opendata/schemas/investments/v2">
 	<contract key="20__XpectoWohnzins__100134" modified="2016-10-12T10:49:39">
 		<product>XpectoWohnzins</product>
 		<contractno>100134</contractno>
-		<affiliate>VP001</affiliate>
+		<affiliate>VP0001</affiliate>
 		<agio>50.00</agio>
 		<agiodiscountaf>20.00</agiodiscountaf>
 		<share>1000.00</share>
@@ -31,7 +31,7 @@
 				<position>Vorstand</position>
 				<emailpriv>harald.elsperger@xpecto.com</emailpriv>
 				<mobilepriv>+49 176 20000000</mobilepriv>
-				<phone1>+49 871 276710</phone1>
+				<phone>+49 871 276710</phone>
 				<maritalstatus>1</maritalstatus>
 				<education>Stu</education>
 				<bankaccount key="B2__xpecto__X000000BF" modified="2016-09-29T17:45:37">
@@ -43,7 +43,6 @@
 					<currency>EUR</currency>
 					<sharedaccount>false</sharedaccount>
 					<type>0</type>
-					<validfrom>2000-01-01</validfrom>
 					<usage key="19__xpecto__X000000BF" modified="1900-01-01T01:01:01+01:00">
 						<types>
 							<type>0</type>
@@ -54,6 +53,7 @@
 							<signed>2012-01-01</signed>
 							<reference>reference1</reference>
 						</mandate>
+						<validfrom>2000-01-01</validfrom>
 					</usage>
 				</bankaccount>
 				<identification key="B3__xpecto__X00000514" modified="2016-09-29T17:45:37">

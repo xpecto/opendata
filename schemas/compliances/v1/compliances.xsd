@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Creator xpecto AG, Thomas Groetzinger, xpecto.com -->
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/compliances/v1"
+		   xmlns="https://xpecto.com/opendata/schemas/compliances/v1"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified">
+
+	<xs:element name="compliances">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="compliance" maxOccurs="unbounded" type="compliance" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="compliance">
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="customerkey" type="string">
+					<xs:annotation>
+						<xs:documentation>code identifies customer</xs:documentation>
+					</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="contractkey" type="string">
+						<xs:annotation>
+							<xs:documentation>code identifies contract</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="product" type="string">
+						<xs:annotation>
+							<xs:documentation>productkey, needs to be synchronized with issuer e.g. "TTF1"</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>date when the compliance was approved </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="status" type="compliancestatus">
+				<xs:annotation>
+					<xs:documentation>compliance status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="processingstep" type="complianceprocessstep">
+				<xs:annotation>
+					<xs:documentation>the processstep of the compliance validation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="comment" type="string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>comment of the compliance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customercontroll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>value of the customercheck</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="customercompliance" type="customercompliance" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="contractcontroll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>value of the contractcheck</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="contractcompliance" type="contractcompliance" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="investmentsurveycontroll" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>value of the ae controll</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="investmentsurveycompliance" type="investmentsurveycompliance" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
+	<xs:simpleType name="compliancestatus">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="unknown"/>
+			<xs:enumeration value="1" id="approval"/>
+			<xs:enumeration value="2" id="approvalwithinappropiatenessdeclaration"/>
+			<xs:enumeration value="3" id="approvalcaseofinassessability"/>
+			<xs:enumeration value="100" id="resubmission"/>
+			<xs:enumeration value="101" id="resubmissioninappropiateness"/>
+			<xs:enumeration value="102" id="resubmissionmissingdocuments"/>
+			<xs:enumeration value="200" id="failure"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:simpleType name="complianceprocessstep">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="open"/>
+			<xs:enumeration value="1" id="proved"/>
+			<xs:enumeration value="2" id="processed"/>
+			<xs:enumeration value="9" id="invalid"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="customercompliance">
+		<xs:sequence>
+			<xs:element name="type" type="customercompliancetype" />
+			<xs:element name="proved" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="customercompliancetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="forsurename"/>
+			<xs:enumeration value="1" id="address"/>
+			<xs:enumeration value="2" id="birthdate"/>
+			<xs:enumeration value="3" id="consultancycontract"/>
+			<xs:enumeration value="4" id="controll23akwg"/>
+			<xs:enumeration value="5" id="controll31wphg"/>
+			<xs:enumeration value="6" id="identificationpi"/>
+			<xs:enumeration value="7" id="identificationparp"/>
+			<xs:enumeration value="8" id="identificationdocs"/>
+			<xs:enumeration value="9" id="benificialowner"/>
+			<xs:enumeration value="10" id="differentbenificialowner"/>
+			<xs:enumeration value="11" id="differentbenificialownerinfo"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="contractcompliance">
+		<xs:sequence>
+			<xs:element name="type" type="contractcompliancetype" />
+			<xs:element name="proved" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="contractcompliancetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="description"/>
+			<xs:enumeration value="1" id="identifier"/>
+			<xs:enumeration value="2" id="amount"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="investmentsurveycompliance">
+		<xs:sequence>
+			<xs:element name="type" type="investementsurveycompliancetype" />
+			<xs:element name="proved" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="investementsurveycompliancetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="appropiate"/>
+			<xs:enumeration value="1" id="inappropiate"/>
+			<xs:enumeration value="2" id="inappropiateacknowledgement"/>
+			<xs:enumeration value="3" id="notspecified"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="string">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="key">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="50"/>
+			<xs:pattern value="[a-zA-Z0-9_\+]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
