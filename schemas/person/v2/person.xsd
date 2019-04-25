@@ -61,6 +61,13 @@
 		<xs:restriction base="xs:unsignedByte">
 			<xs:enumeration value="0" id="single"/>
 			<xs:enumeration value="1" id="married"/>
+			<xs:enumeration value="11" id="indivorce"/>
+			<xs:enumeration value="12" id="divorced"/>
+			<xs:enumeration value="13" id="widowed"/>
+			<xs:enumeration value="20" id="civilpartnership"/>
+			<xs:enumeration value="22" id="suspendedcivilpartnership"/>
+			<xs:enumeration value="23" id="partnerdeceased"/>
+			<xs:enumeration value="99" id="unknwon"/>
 		</xs:restriction>
 	</xs:simpleType>
 
