@@ -83,10 +83,15 @@
 	
 	<xs:complexType name="contract">
 			<xs:sequence>
-				<xs:element name="product" type="string">
+				<xs:element name="product">
 					<xs:annotation>
 						<xs:documentation>productkey, needs to be synchronized with issuer e.g. "TTF1" </xs:documentation>
 					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:minLength value="1"/>
+						</xs:restriction>
+					</xs:simpleType>
 				</xs:element>
 				<xs:element name="contractno" type="string">
 					<xs:annotation>
