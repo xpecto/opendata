@@ -136,9 +136,9 @@
 	<xs:complexType name="bankaccount">
 		<xs:sequence>
 			<xs:element name="accountholder" type="string" />
-			<xs:element name="bic" type="string" />
+			<xs:element name="bic" type="string" minOccurs="0"/>
 			<xs:element name="iban" type="string" />
-			<xs:element name="bank" type="string" />
+			<xs:element name="bank" type="string" minOccurs="0"/>
 			<xs:element name="country" type="country" />
 			<xs:element name="currency" type="currency" />
 			<xs:element name="sharedaccount" type="xs:boolean">
@@ -203,7 +203,7 @@
 					<xs:documentation>timestamp from ident-service</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="code" type="string">
+			<xs:element name="code" type="string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>code or transaction from ident-service</xs:documentation>
 				</xs:annotation>
@@ -279,7 +279,7 @@
 			<xs:element name="birthcountry" type="string" minOccurs="0" />
 			<xs:element name="position" type="string" minOccurs="0" />
 
-			<xs:element name="emailpriv" type="string">
+			<xs:element name="emailpriv" type="string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>main, private mailaddress for person, used as userid if contract.customer.userid is not specified</xs:documentation>
 				</xs:annotation>
