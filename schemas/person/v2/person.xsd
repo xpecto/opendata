@@ -147,7 +147,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="type" type="bankaccounttype"/>
-			<xs:element name="usage" minOccurs="0">
+			<xs:element name="usage" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>how the bankaccount should be used by the issuer in reference to this contract</xs:documentation>
 				</xs:annotation>
@@ -180,6 +180,11 @@
 						</xs:element>
 						<xs:element name="validfrom" type="xs:date" minOccurs="0" />
 						<xs:element name="validuntil" type="xs:date" minOccurs="0" />
+						<xs:element name="forallcontractsofproduct" type="xs:boolean" minOccurs="0">
+						 	<xs:annotation>
+						 		<xs:documentation>On the xpecto datastructure usages can be used per contract or per product, this flag indicates that the usage is used for all contracts off the products. If there are usages per controct, only contract usages will be considered</xs:documentation>
+						 	</xs:annotation>
+						 </xs:element>
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
