@@ -277,11 +277,21 @@
 	<xs:complexType name="person">
 		<xs:sequence>
 			<xs:element name="type" type="persontype"/>
-			<xs:element name="companyname" type="string" minOccurs="0" />
-			<xs:element name="salutation" type="string" />
-			<xs:element name="title" type="string" minOccurs="0" />
-			<xs:element name="forename" type="string" />
-			<xs:element name="surname" type="string" />
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="companyname" type="string"/>		
+					<xs:element name="salutation" type="string" minOccurs="0"/>
+					<xs:element name="title" type="string" minOccurs="0" />
+					<xs:element name="forename" type="string" minOccurs="0"/>
+					<xs:element name="surname" type="string" minOccurs="0"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="salutation" type="string" />
+					<xs:element name="title" type="string" minOccurs="0" />
+					<xs:element name="forename" type="string" />
+					<xs:element name="surname" type="string" />
+				</xs:sequence>
+			</xs:choice>
 			<xs:element name="street" type="string" />
 			<xs:element name="zip" type="string" />
 			<xs:element name="city" type="string" />
