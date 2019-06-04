@@ -207,6 +207,7 @@
 			<xs:enumeration value="17" id="crypto_currency"/>
 			<xs:enumeration value="18" id="unsecured_junior_debt"/>
 			<xs:enumeration value="19" id="private_equity"/>
+			<xs:enumeration value="20" id="fixed_deposit"/>
 		</xs:restriction>
 	</xs:simpleType>
 

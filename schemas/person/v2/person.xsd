@@ -137,7 +137,14 @@
 		<xs:sequence>
 			<xs:element name="accountholder" type="string" />
 			<xs:element name="bic" type="string" minOccurs="0"/>
-			<xs:element name="iban" type="string" />
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="iban" type="string" />
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="portfolionumber" type="string" />
+				</xs:sequence>
+			</xs:choice>
 			<xs:element name="bank" type="string" minOccurs="0"/>
 			<xs:element name="country" type="country" />
 			<xs:element name="currency" type="currency" />
