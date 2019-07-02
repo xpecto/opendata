@@ -51,7 +51,7 @@
 					<xs:documentation>the processstep of the compliance validation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="comment" type="string" minOccurs="0">
+			<xs:element name="comment" type="memo" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>comment of the compliance</xs:documentation>
 				</xs:annotation>
@@ -172,6 +172,12 @@
 	<xs:simpleType name="string">
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="memo">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="65000"/>
 		</xs:restriction>
 	</xs:simpleType>
 
