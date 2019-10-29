@@ -177,7 +177,6 @@
 
 	<xs:simpleType name="memo">
 		<xs:restriction base="xs:string">
-			<xs:maxLength value="65000"/>
 		</xs:restriction>
 	</xs:simpleType>
 
