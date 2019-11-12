@@ -7,3 +7,4 @@ xpecto has implemented an API to import and export data in the opendata format.
 
 For testing the API xpecto has configured a test-sytem. 
 To get the accessdata to the testsystem please contact the xpecto AG under https://www.xpectotalonec.com/unternehmen/kontakt/.
+
