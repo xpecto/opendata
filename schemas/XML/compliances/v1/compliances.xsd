@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Creator xpecto AG, Thomas Groetzinger, xpecto.com -->
-<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/compliances/v1"
-		   xmlns="https://xpecto.com/opendata/schemas/compliances/v1"
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/compliances/XML/v1"
+		   xmlns="https://xpecto.com/opendata/schemas/compliances/XML/v1"
 		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
 

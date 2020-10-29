@@ -1,19 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Version 20180131 -->
-<!-- Creator xpecto AG, Harald Elsperger, xpecto.com -->
-<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/investments/v1"
-		   xmlns="https://xpecto.com/opendata/schemas/investments/v1"
-		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Creator xpecto AG, Thomas Grötzinger, xpecto.com -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
 	
-	<xs:element name="investments">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name="contract" maxOccurs="unbounded" type="contract" />
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-
 	<xs:simpleType name="string">
 		<xs:restriction base="xs:string">
 			<xs:maxLength value="250"/>
@@ -24,7 +13,7 @@
 		<xs:restriction base="xs:string">
 			<xs:minLength value="5"/>
 			<xs:maxLength value="50"/>
-			<xs:pattern value="[a-zA-Z0-9_]+"/>
+			<xs:pattern value="[a-zA-Z0-9_+-]+"/>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -79,6 +68,7 @@
 		<xs:restriction base="xs:unsignedByte">
 			<xs:enumeration value="0" id="bankaccount"/>
 			<xs:enumeration value="1" id="investmentaccount"/>
+			<xs:enumeration value="2" id="wallet"/>
 		</xs:restriction>
 	</xs:simpleType>
 
@@ -126,23 +116,60 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+	<xs:complexType name="customfield">
+		<xs:annotation>
+			<xs:documentation>additional field, which can be added and is mapped to the fields of the entities</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="id" type="string" use="optional" />
+				<xs:attribute name="name" type="string" use="optional" />
+				<xs:key name="IdOrNameAttributePresent">
+					<xs:selector xpath="." />
+					<xs:field xpath="@id | @name" />
+				</xs:key>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="customobject">
+		<xs:annotation>
+			<xs:documentation>additional object, which can be added and is in relation to the object which is the parent of the customobject</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="customfield" type="customfield" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="entity" type="entity" use="required" />
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
 	<xs:complexType name="bankaccount">
 		<xs:sequence>
 			<xs:element name="accountholder" type="string" />
-			<xs:element name="bic" type="string" />
-			<xs:element name="iban" type="string" />
-			<xs:element name="bank" type="string" />
-			<xs:element name="country" type="country" />
-			<xs:element name="currency" type="currency" />
-			<xs:element name="sharedaccount" type="xs:boolean">
+			<xs:element name="bic" type="string" minOccurs="0"/>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="iban" type="string" />
+					<xs:element name="bank" type="string" minOccurs="0"/>
+					<xs:element name="country" type="country" />
+					<xs:element name="currency" type="currency" />
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="portfolionumber" type="string" />
+					<xs:element name="bank" type="string" minOccurs="0"/>
+					<xs:element name="country" type="country" />
+					<xs:element name="currency" type="currency" minOccurs="0"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="sharedholder" type="xs:string" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>true if account is shared by multiple persons, e.g. a couple</xs:documentation>
+					<xs:documentation>key of the person of the second holder of the bankaccount</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="type" type="bankaccounttype"/>
-			<xs:element name="validfrom" type="xs:date" minOccurs="0" />
-			<xs:element name="validuntil" type="xs:date" minOccurs="0" />
-			<xs:element name="usage">
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="usage" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>how the bankaccount should be used by the issuer in reference to this contract</xs:documentation>
 				</xs:annotation>
@@ -173,6 +200,14 @@
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
+						<xs:element name="validfrom" type="xs:date" minOccurs="0" />
+						<xs:element name="validuntil" type="xs:date" minOccurs="0" />
+						<xs:element name="forallcontractsofproduct" type="xs:boolean" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>On the xpecto datastructure usages can be used per contract or per product, this flag indicates that the usage is used for all contracts off the products. If there are usages per controct, only contract usages will be considered</xs:documentation>
+							</xs:annotation>
+						 </xs:element>
+						 <xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -190,7 +225,7 @@
 			<xs:element name="validfrom" type="xs:date" />
 			<xs:element name="validuntil" type="xs:date" />
 			<xs:element name="issuer" type="string" />
-			<xs:element name="verified" type="identservicetype" />
+			<xs:element name="verified" type="identservicetype" minOccurs="0"/>
 			<xs:element name="submitted" type="xs:dateTime">
 				<xs:annotation>
 					<xs:documentation>timestamp from ident-service</xs:documentation>
@@ -201,6 +236,7 @@
 					<xs:documentation>code or transaction from ident-service</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -214,7 +250,7 @@
 					<xs:documentation>category or class of event</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="subject" type="string" />
+			<xs:element name="subject" type="string" minOccurs="0"/>
 			<xs:element name="file" type="string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>filename without path, every file needs to be included with this filename into zip-archive</xs:documentation>
@@ -226,6 +262,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="comment" type="string" minOccurs="0" />
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -247,6 +284,7 @@
 			<xs:element name="validfrom" type="xs:date" minOccurs="0" />
 			<xs:element name="validuntil" type="xs:date" minOccurs="0" />
 			<xs:element name="comment" type="string" minOccurs="0" />
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -254,40 +292,43 @@
 	
 	<xs:complexType name="person">
 		<xs:sequence>
-			<xs:element name="type" type="persontype"/>
-			<xs:element name="companyname" type="string" minOccurs="0" />
-			<xs:element name="salutation" type="string" />
-			<xs:element name="title" type="string" minOccurs="0" />
-			<xs:element name="forename" type="string" />
-			<xs:element name="surname" type="string" />
-			<xs:element name="street" type="string" />
-			<xs:element name="zip" type="string" />
-			<xs:element name="city" type="string" />
-			<xs:element name="country" type="country" />
-			<xs:element name="birthdate" type="xs:date" minOccurs="0" />
-			<xs:element name="birthplace" type="string" minOccurs="0" />
-			<xs:element name="birthcountry" type="string" minOccurs="0" />
-			<xs:element name="position" type="string" minOccurs="0" />
-			<xs:element name="email" type="string" minOccurs="0" />
-			<xs:element name="emailpriv" type="string">
-				<xs:annotation>
-					<xs:documentation>main, private mailaddress for person, used as userid if contract.customer.userid is not specified</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="mobile" type="string" minOccurs="0" />
-			<xs:element name="mobilepriv" type="string">
-				<xs:annotation>
-					<xs:documentation>main, private mobile phone for person, used for sending MTAN-Messages</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="phone1" type="string" minOccurs="0" />
-			<xs:element name="phone1priv" type="string" minOccurs="0" />
-			<xs:element name="phone2" type="string" minOccurs="0" />
-			<xs:element name="phone2priv" type="string" minOccurs="0" />
-			<xs:element name="web" type="string" minOccurs="0" />
-			<xs:element name="webpriv" type="string" minOccurs="0" />
-			<xs:element name="maritalstatus" type="martialstatus" minOccurs="0"  />
-			<xs:element name="education" type="string" minOccurs="0" />
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="type" type="persontype"/>
+					<xs:element name="companyname" type="string" minOccurs="0" />
+					<xs:element name="salutation" type="string" />
+					<xs:element name="title" type="string" minOccurs="0" />
+					<xs:element name="forename" type="string" />
+					<xs:element name="surname" type="string" />
+					<xs:element name="street" type="string" />
+					<xs:element name="zip" type="string" />
+					<xs:element name="city" type="string" />
+					<xs:element name="country" type="country" />
+					<xs:element name="birthdate" type="xs:date" minOccurs="0" />
+					<xs:element name="birthplace" type="string" minOccurs="0" />
+					<xs:element name="birthcountry" type="string" minOccurs="0" />
+					<xs:element name="position" type="string" minOccurs="0" />
+
+					<xs:element name="emailpriv" type="string">
+						<xs:annotation>
+							<xs:documentation>main, private mailaddress for person, used as userid if contract.customer.userid is not specified</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="mobilepriv" type="string" minOccurs="0"/>
+					<xs:element name="phonepriv" type="string" minOccurs="0" maxOccurs="2" />
+					<xs:element name="webpriv" type="string" minOccurs="0" />
+
+					<xs:element name="email" type="string" minOccurs="0" />
+					<xs:element name="mobile" type="string" minOccurs="0" />
+					<xs:element name="phone" type="string" minOccurs="0" maxOccurs="2" />
+					<xs:element name="web" type="string" minOccurs="0" />
+							
+					<xs:element name="maritalstatus" type="martialstatus" minOccurs="0"  />
+					<xs:element name="education" type="string" minOccurs="0" />
+					<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element name="isreference"/>
+			</xs:choice>
 			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>
 			<xs:element name="identification" minOccurs="0" maxOccurs="unbounded" type="identification"/>
 			<xs:element name="subperson" minOccurs="0" maxOccurs="unbounded" >
@@ -305,127 +346,11 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
-	</xs:complexType>
-	
-	<xs:complexType name="customer">
-		<xs:sequence>
-			<xs:element name="pwd" type="string" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>
-						password for webportal
-
-						stored as password hash, starting with $HASHMODE
-						should be BCRYPT, MD5 possible but weak
-
-						* java:
-						import org.mindrot.jbcrypt.BCrypt;
-						String plaintextPwd = "test12354";
-						String hashed = BCrypt.hashpw(plaintextPwd, BCrypt.gensalt());
-
-						String encryptedUserPwd = "$BCRYPT" + hashed;
-
-						// test12354 	=> encryptedUserPwd  = "$BCRYPT$2a$10$HePP0cvCl.tFrijNdtjtRu0RrzuP0zEEXADobxKviTCOS0iJuuLfu"
-						// pwd 			=> encryptedUserPwd  = "$BCRYPT$2a$10$0bt2yDxGyLbSW6BSrQQDR.TjmVakUP3VKE2YA9OYnarpoEtCQ39x."
-						// warn: as salt changes every time, hashes can not be compared
-						// BCrypt.checkpw(plaintextPwd, hashed);
-
-						* php:
-						$plaintextPwd = "test12354";
-						$hashed = password_hash($plaintextPwd , PASSWORD_BCRYPT);
-						$encryptedUserPwd = '$BCRYPT' . $hashed
-						// test12354	=> $encryptedUserPwd = "$BCRYPT$2y$10$BT.Qy8SdfWysS9uiu5wxQ.OsSHF8QPYPoXGme2VgL0XH6p4jUlzhO"
-						// password_verify($plaintextPwd , $hashed)
-					</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="userid" type="string" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>userid, for webportal, emailpriv is used if omitted or empty</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="person" type="person"/>
-			<xs:element name="event" type="event" maxOccurs="unbounded" />
-			<xs:element name="property" type="property" maxOccurs="unbounded" />
-		</xs:sequence>
-		<xs:attribute name="key" type="key" use="required" />
-		<xs:attribute name="modified" type="xs:dateTime" use="required" />
-	</xs:complexType>
-	
-	<xs:complexType name="contract">
-			<xs:sequence>
-				<xs:element name="product" type="string">
-					<xs:annotation>
-						<xs:documentation>productkey, needs to be synchronized with issuer e.g. "TTF1" </xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="contractno" type="string">
-					<xs:annotation>
-						<xs:documentation>number of contract as known by customer</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="affiliate" type="string">
-					<xs:annotation>
-						<xs:documentation>code identifies affiliate</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="campaign" type="string" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>code for campaing</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="agio" type="decimalunsigned" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>amount of agio in product-currency</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="agiodiscountaf" type="decimalunsigned" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>amount of agio discounted by affiliate in product-currency</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="share" type="decimalunsigned">
-					<xs:annotation>
-						<xs:documentation>value of contract in product-currency</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="units" type="decimalunsigned" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>number of units bought if product consists of shares or other parts</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="interestrate" type="decimalunsigned" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>percent of interest per year, can be ommited if product-setting is used</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="signed" type="xs:date">
-					<xs:annotation>
-						<xs:documentation>date of contract signature</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="accepted" type="xs:date" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>date of acceptance by issuer</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="start" type="xs:date">
-					<xs:annotation>
-						<xs:documentation>start of investment (e.g. start of dividend-period)</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="end" type="xs:date">
-					<xs:annotation>
-						<xs:documentation>end of investment</xs:documentation>
-					</xs:annotation>
-				</xs:element>
-				<xs:element name="customer" type="customer"/>
-				<xs:element name="event" type="event" maxOccurs="unbounded" />
-				<xs:element name="property" type="property" maxOccurs="unbounded" />
-			</xs:sequence>
-			<xs:attribute name="key" type="key" use="required" />
-			<xs:attribute name="modified" type="xs:dateTime" use="required" />
 	</xs:complexType>
 </xs:schema>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<investments xmlns="https://xpecto.com/opendata/schemas/investments/v1">
+<investments xmlns="https://xpecto.com/opendata/schemas/XML/investments/v1">
 	<contract key="20__XpectoWohnzins__100134" modified="2016-10-12T10:49:39">
 		<product>XpectoWohnzins</product>
 		<contractno>100134</contractno>

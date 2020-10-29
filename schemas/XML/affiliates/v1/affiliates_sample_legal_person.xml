@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<affiliates xmlns="https://xpecto.com/opendata/schemas/affiliates/v1">
+<affiliates xmlns="https://xpecto.com/opendata/schemas/affiliates/XML/v1">
 	<affiliate key="50__xpecto__WW200250" modified="2016-10-05T17:01:01">
 		<pwd>$algo$hash</pwd>
 		<userid>Jimmy1234</userid>

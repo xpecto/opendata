@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <!-- Version 20181107 -->
 <!-- Creator xpecto AG, Harald Elsperger, xpecto.com -->
-<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/affiliates/v2"
-		   xmlns="https://xpecto.com/opendata/schemas/affiliates/v2"
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/affiliates/XML/v2"
+		   xmlns="https://xpecto.com/opendata/schemas/affiliates/XML/v2"
 		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
 

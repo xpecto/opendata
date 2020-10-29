@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Creator xpecto AG, Harald Elsperger, xpecto.com -->
+<xs:schema targetNamespace="https://xpecto.com/opendata/schemas/XML/investments/v3"
+		   xmlns="https://xpecto.com/opendata/schemas/XML/investments/v3"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   elementFormDefault="qualified">
+
+	<xs:include schemaLocation="https://raw.githubusercontent.com/xpecto/opendata/v3/schemas/person/v3/person.xsd"/>
+
+	<xs:element name="investments">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="contract" maxOccurs="unbounded" type="contract" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="customers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customer" maxOccurs="unbounded" type="customer" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="customer">
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+				<xs:element name="pwd" type="string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>
+							password for webportal
+
+							stored as password hash, starting with $HASHMODE
+							should be BCRYPT, MD5 possible but weak
+
+							* java:
+							import org.mindrot.jbcrypt.BCrypt;
+							String plaintextPwd = "test12354";
+							String hashed = BCrypt.hashpw(plaintextPwd, BCrypt.gensalt());
+
+							String encryptedUserPwd = "$BCRYPT" + hashed;
+
+							// test12354 	=> encryptedUserPwd  = "$BCRYPT$2a$10$HePP0cvCl.tFrijNdtjtRu0RrzuP0zEEXADobxKviTCOS0iJuuLfu"
+							// pwd 			=> encryptedUserPwd  = "$BCRYPT$2a$10$0bt2yDxGyLbSW6BSrQQDR.TjmVakUP3VKE2YA9OYnarpoEtCQ39x."
+							// warn: as salt changes every time, hashes can not be compared
+							// BCrypt.checkpw(plaintextPwd, hashed);
+
+							* php:
+							$plaintextPwd = "test12354";
+							$hashed = password_hash($plaintextPwd , PASSWORD_BCRYPT);
+							$encryptedUserPwd = '$BCRYPT' . $hashed
+							// test12354	=> $encryptedUserPwd = "$BCRYPT$2y$10$BT.Qy8SdfWysS9uiu5wxQ.OsSHF8QPYPoXGme2VgL0XH6p4jUlzhO"
+							// password_verify($plaintextPwd , $hashed)
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="userid" type="string" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>userid, for webportal, emailpriv is used if omitted or empty</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+				<xs:element name="isreference"/>
+			</xs:choice>
+			<xs:element name="person" type="person"/>
+			<xs:element name="investmentsurvey" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="date" type="xs:date" />
+						<xs:element name="investmentexperience" type="investmentexperience" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element name="serviceexperience" type="serviceexperience" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element name="avgyearlytransactions" type="avgyearlytransactionstype" minOccurs="0" />
+						<xs:element name="avgtransactionvalue" type="avgtransactionvaluetype" minOccurs="0" />
+						<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="key" type="key" use="required" />
+					<xs:attribute name="modified" type="xs:dateTime" use="required" />
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+	
+	<xs:complexType name="contract">
+			<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="product" type="string">
+						<xs:annotation>
+							<xs:documentation>productkey, needs to be synchronized with issuer e.g. "TTF1" </xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="contractno" type="string">
+						<xs:annotation>
+							<xs:documentation>number of contract as known by customer</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="agent" type="string">
+						<xs:annotation>
+							<xs:documentation>code identifies agent</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="campaign" type="string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>code for marketing campaign</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="agio" type="decimalunsigned" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>amount of agio in product-currency</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="agiodiscountaf" type="decimalunsigned" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>amount of agio discounted by agent in product-currency</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="share" type="decimalunsigned">
+						<xs:annotation>
+							<xs:documentation>value of contract in product-currency</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="units" type="decimalunsigned" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>number of units bought if product consists of shares or other parts</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="interestrate" type="decimalunsigned" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>percent of interest per year, can be ommited if product-setting is used</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="signed" type="xs:date">
+						<xs:annotation>
+							<xs:documentation>date of contract signature</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="accepted" type="xs:date" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>date of acceptance by issuer</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="start" type="xs:date" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>start of investment (e.g. start of dividend-period)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="end" type="xs:date" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>end of investment</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:element name="isreference"/>
+			</xs:choice>
+			
+				<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="customer" type="customer"/>
+				<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="key" type="key" use="required" />
+			<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="investmentexperience">
+		<xs:sequence>
+			<xs:element name="type" type="investmenttype" />
+			<xs:element name="knowledge" type="xs:boolean" />
+			<xs:element name="experience" type="rangeofexperience"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="serviceexperience">
+		<xs:sequence>
+			<xs:element name="type" type="servicetype" />
+			<xs:element name="experience" type="rangeofexperience"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="servicetype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="independent"/>
+			<xs:enumeration value="1" id="investment_consultancy"/>
+			<xs:enumeration value="2" id="investment_management"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="investmenttype">
+		<xs:restriction base="xs:unsignedByte">
+			<xs:enumeration value="0" id="investment_fund"/>
+			<xs:enumeration value="1" id="government_bonds"/>
+			<xs:enumeration value="2" id="money_market_funds"/>
+			<xs:enumeration value="3" id="bond"/>
+			<xs:enumeration value="4" id="share"/>
+			<xs:enumeration value="5" id="certificate"/>
+			<xs:enumeration value="6" id="reverse_convertible_bond"/>
+			<xs:enumeration value="7" id="alternative_investment_fund"/>
+			<xs:enumeration value="8" id="warrants"/>
+			<xs:enumeration value="9" id="emerging_market_bonds"/>
+			<xs:enumeration value="10" id="hedge_fund"/>
+			<xs:enumeration value="11" id="futures_trading"/>
+			<xs:enumeration value="12" id="participation_right"/>
+			<xs:enumeration value="13" id="participation_paper"/>
+			<xs:enumeration value="14" id="operative_participation_in_a_limited_partnership"/>
+			<xs:enumeration value="15" id="participation_in_a_limited_partnership"/>
+			<xs:enumeration value="16" id="contract_for_difference"/>
+			<xs:enumeration value="17" id="crypto_currency"/>
+			<xs:enumeration value="18" id="unsecured_junior_debt"/>
+			<xs:enumeration value="19" id="private_equity"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="rangeofexperience">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="lower than 3 years"/>
+			<xs:enumeration value="3 to 5 years"/>
+			<xs:enumeration value="greater than 5 years"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="avgyearlytransactionstype">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="0" id="noTrans"/>
+			<xs:enumeration value="5" id="lower_5_Trans"/>
+			<xs:enumeration value="10" id="bet_5_to_10_Trans"/>
+			<xs:enumeration value="11" id="more_than_10_Trans"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="avgtransactionvaluetype">
+		<xs:restriction base="xs:integer">
+			<xs:enumeration value="3000" id="lower_3000"/>
+			<xs:enumeration value="5000" id="bet_3000_to_5000"/>
+			<xs:enumeration value="10000" id="bet_5000_to_10000"/>
+			<xs:enumeration value="10001" id="over_10000"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
