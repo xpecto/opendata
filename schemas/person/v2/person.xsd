@@ -209,6 +209,47 @@
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
 	</xs:complexType>
 
+	<xs:complexType name="wallet">
+		<xs:sequence>
+			<xs:element name="walletholder" type="string" />
+			<xs:element name="currency" type="string" />
+			<xs:element name="walletaddress" type="string" />
+			<xs:element name="blockchain" type="string" minOccurs="0"/>
+			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="usage" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>how the bankaccount should be used by the issuer in reference to this contract</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="types">
+							<xs:annotation>
+								<xs:documentation>there needs to be at least one usage type for every bankaccount, e.g. 8 for dividends</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="type" type="bankaccountusagetype" minOccurs="1" maxOccurs="unbounded"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="validfrom" type="xs:date" minOccurs="0" />
+						<xs:element name="validuntil" type="xs:date" minOccurs="0" />
+						<xs:element name="forallcontractsofproduct" type="xs:boolean" minOccurs="0">
+						 	<xs:annotation>
+						 		<xs:documentation>On the xpecto datastructure usages can be used per contract or per product, this flag indicates that the usage is used for all contracts off the products. If there are usages per controct, only contract usages will be considered</xs:documentation>
+						 	</xs:annotation>
+						 </xs:element>
+						 <xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+					<xs:attribute name="key" type="key" use="required" />
+					<xs:attribute name="modified" type="xs:dateTime" use="required" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
 	<xs:complexType name="identification">
 		<xs:sequence>
 			<xs:element name="documentnr" type="string" />
@@ -326,6 +367,7 @@
 			<xs:element name="education" type="string" minOccurs="0" />
 			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>
+			<xs:element name="wallet" minOccurs="0" maxOccurs="unbounded" type="wallet"/>
 			<xs:element name="identification" minOccurs="0" maxOccurs="unbounded" type="identification"/>
 			<xs:element name="subperson" minOccurs="0" maxOccurs="unbounded" >
 				<xs:annotation>
