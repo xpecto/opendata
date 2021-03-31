@@ -56,6 +56,8 @@
 			<xs:element name="person" type="person"/>
 			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />

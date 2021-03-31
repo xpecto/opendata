@@ -69,6 +69,7 @@
 						<xs:element name="avgyearlytransactions" type="avgyearlytransactionstype" minOccurs="0" />
 						<xs:element name="avgtransactionvalue" type="avgtransactionvaluetype" minOccurs="0" />
 						<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -76,6 +77,8 @@
 			</xs:element>
 			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -157,6 +160,8 @@
 				<xs:element name="customer" type="customer"/>
 				<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 				<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+				<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 			<xs:attribute name="key" type="key" use="required" />
 			<xs:attribute name="modified" type="xs:dateTime" use="required" />

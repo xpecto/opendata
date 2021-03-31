@@ -86,6 +86,7 @@
 					</xs:sequence>
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -187,4 +188,11 @@
 			<xs:pattern value="[a-zA-Z0-9_\+]+"/>
 		</xs:restriction>
 	</xs:simpleType>
+
+	<xs:complexType name="customfield">
+	  <xs:sequence>
+		<xs:element name="name" type="string" />
+		<xs:element name="value" type="memo" />
+	  </xs:sequence>
+	</xs:complexType>
 </xs:schema>

@@ -138,6 +138,22 @@
 		</xs:simpleContent>
 	</xs:complexType>
 
+	<xs:complexType name="customfield">
+		<xs:sequence>
+			<xs:element name="name" type="string" />
+			<xs:element name="value" type="memo" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="customobject">
+		<xs:sequence>
+			<xs:element name="entity" type="key" />
+			<xs:element name="customfield" type="customfield" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="key" type="key" use="required" />
+		<xs:attribute name="modified" type="xs:dateTime" use="required" />
+	</xs:complexType>
+
 	<xs:complexType name="bankaccount">
 		<xs:sequence>
 			<xs:element name="accountholder" type="string" />
@@ -199,11 +215,13 @@
 						 	</xs:annotation>
 						 </xs:element>
 					<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -240,11 +258,13 @@
 						 	</xs:annotation>
 						 </xs:element>
 						 <xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+						 <xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
 					<xs:attribute name="key" type="key" use="required" />
 					<xs:attribute name="modified" type="xs:dateTime" use="required" />
 				</xs:complexType>
 			</xs:element>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -269,6 +289,7 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -295,6 +316,7 @@
 			</xs:element>
 			<xs:element name="comment" type="memo" minOccurs="0" />
 			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -317,6 +339,7 @@
 			<xs:element name="validuntil" type="xs:date" minOccurs="0" />
 			<xs:element name="comment" type="memo" minOccurs="0" />
 			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
@@ -386,6 +409,8 @@
 			</xs:element>
 			<xs:element name="event" type="event" minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="property" type="property" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="customobject" type="customobject" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="key" type="key" use="required" />
 		<xs:attribute name="modified" type="xs:dateTime" use="required" />
