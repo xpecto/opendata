@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "object",
+  "required": [ "compliances"],
+  "properties": {
+    "compliances": {
+      "type": "array",
+      "items": {
+        "$ref": "#/%24defs/compliance"
+      },
+      "mitItems": 1
+    }
+  },
+  "$defs": {
+    "string": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "memo": {
+      "$ref": "#/%24defs/string"
+    },
+    "key": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 50,
+      "pattern": "[a-zA-Z0-9_\\+]+"
+    },
+    "customfield": {
+      "type": "object",
+      "required": [ "name", "value" ],
+      "properties": {
+        "name": {
+          "$ref": "#/%24defs/string"
+        },
+        "value": {
+          "$ref": "#/%24defs/memo"
+        }
+      }
+    },
+    "investementsurveycompliancetype": {
+      "type": "integer",
+      "description": "0 appropiate, 1 inappropiate, 2 inappropiateacknowledgement, 3 notspecified",
+      "enum": [ 0, 1, 2, 3 ]
+    },
+    "investmentsurveycompliance": {
+      "type": "object",
+      "required": [ "type", "proved" ],
+      "properties": {
+        "type": {
+          "$ref": "#/%24defs/investementsurveycompliancetype"
+        },
+        "proved": {
+          "type": "boolean"
+        }
+      }
+    },
+    "contractcompliancetype": {
+      "type": "integer",
+      "description": "0 description, 1 identifier, 2 amount",
+      "enum": [ 0, 1, 2 ]
+    },
+    "contractcompliance": {
+      "type": "object",
+      "required": [ "type", "proved" ],
+      "properties": {
+        "type": {
+          "$ref": "#/%24defs/contractcompliancetype"
+        },
+        "proved": {
+          "type": "boolean"
+        }
+      }
+    },
+    "customercompliancetype": {
+      "type": "integer",
+      "enum": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+    },
+    "customercompliance": {
+      "type": "object",
+      "required": [ "type", "proved" ],
+      "properties": {
+        "type": {
+          "$ref": "#/%24defs/customercompliancetype"
+        },
+        "proved": {
+          "type": "boolean"
+        }
+      }
+    },
+    "complianceprocessstep": {
+      "type": "integer",
+      "description": "0 open, 1 proved, 2 processed, 9 invalid",
+      "enum": [ 0, 1, 2, 9 ]
+    },
+    "compliancestatus": {
+      "type": "integer",
+      "description": "0 unknown, 1 approval, 2 approvalwithinappropiatenessdeclaration, 3 approvalcaseofinassessability, 100 resubmission, 101 resubmissioninappropiateness, 102 resubmissionmissingdocuments, 200 failure",
+      "enum": [ 0, 1, 2, 3, 100, 101, 102, 200 ]
+    },
+    "compliance": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [ "customerkey" ],
+          "properties": {
+            "customerkey": {
+              "description": "code identifies customer",
+              "$ref": "#/%24defs/string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [ "contractkey", "product" ],
+          "properties": {
+            "contractkey": {
+              "description": "code identifies contract",
+              "$ref": "#/%24defs/string"
+            },
+            "product": {
+              "description": "roductkey, needs to be synchronized with issuer e.g. \"TTF1\"",
+              "$ref": "#/%24defs/string"
+            }
+          }
+        }
+      ],
+      "required": [ "date", "status", "processingstep", "key", "modified" ],
+      "properties": {
+        "date": {
+          "description": "date when the compliance was approved",
+          "type": "string",
+          "format": "date"
+        },
+        "status": {
+          "$ref": "#/%24defs/compliancestatus"
+        },
+        "processingstep": {
+          "$ref": "#/%24defs/complianceprocessstep"
+        },
+        "comments": {
+          "$ref": "#/%24defs/memo"
+        },
+        "customercontroll": {
+          "type": "object",
+          "description": "value of the customercheck",
+          "required": [ "customercompliances" ],
+          "properties": {
+            "customercompliances": {
+              "type": "array",
+              "items": {
+                "$ref": "#/%24defs/customercompliance"
+              }
+            }
+          }
+        },
+        "contractcontroll": {
+          "type": "object",
+          "description": "value of the contractcheck",
+          "required": [ "contractcompliances" ],
+          "properties": {
+            "contractcompliances": {
+              "type": "array",
+              "items": {
+                "$ref": "#/%24defs/contractcompliance"
+              }
+            }
+          }
+        },
+        "investmentsurveycontroll": {
+          "type": "object",
+          "description": "value of the ae controll",
+          "required": [ "investmentsurveycompliances" ],
+          "properties": {
+            "investmentsurveycompliances": {
+              "type": "array",
+              "items": {
+                "$ref": "#/%24defs/investmentsurveycompliance"
+              }
+            }
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

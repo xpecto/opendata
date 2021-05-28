@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "object",
+  "required": [ "affiliates" ],
+  "properties": {
+    "affiliates": {
+      "type": "array",
+      "items": {
+        "$ref": "#/%24defs/affiliate"
+      },
+      "mitItems": 1
+    }
+  },
+  "$defs": {
+    "affiliate": {
+      "type": "object",
+      "required": [ "person", "key", "modified" ],
+      "properties": {
+        "pwd": {
+          "$ref": "person.001.json#/%24defs/string"
+        },
+        "userid": {
+          "$ref": "person.001.json#/%24defs/string"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/xpectofield"
+          }
+        },
+        "person": {
+          "$ref": "person.001.json#/%24defs/person"
+        },
+        "event": {
+          "$refs": "person.001.json#/%24defs/event"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/property"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/customfield"
+          }
+        },
+        "customobjects": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/customobject"
+          }
+        },
+        "key": {
+          "$ref": "person.001.json#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

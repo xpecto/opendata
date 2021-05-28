@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "object",
+  "required": [ "contracts" ],
+  "properties": {
+    "contracts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/contract"
+      },
+      "mitItems": 1
+    },
+    "customers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/customer"
+      }
+    }
+  },
+  "$defs": {
+    "contract": {
+      "type": "object",
+      "required": [ "product", "contractno", "affiliate", "share", "signed", "customer", "key", "modified" ],
+      "properties": {
+        "product": {
+          "type": "string",
+          "minLength": 1,
+          "description": "productkey, needs to be synchronized with issuer e.g. \"TTF1\""
+        },
+        "contractno": {
+          "$ref": "person.001.json#/%24defs/string",
+          "description": "number of contract as known by customer"
+        },
+        "affiliate": {
+          "$ref": "person.001.json#/%24defs/string",
+          "description": "code identifies affiliate"
+        },
+        "campaign": {
+          "$ref": "person.001.json#/%24defs/string",
+          "description": "code for campaign"
+        },
+        "agio": {
+          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "description": "amount of agio in product-currency"
+        },
+        "agiodiscountaf": {
+          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "description": "amount of agio discounted by affiliate in product-currency"
+        },
+        "share": {
+          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "description": "value of contract in product-currency"
+        },
+        "units": {
+          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "description": "number of units bought if product consists of shares or other parts"
+        },
+        "interestrate": {
+          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "description": "percent of interest per year, can be ommited if product-setting is used"
+        },
+        "signed": {
+          "type": "string", "format": "date",
+          "description": "date of contract signature"
+        },
+        "accepted": {
+          "type": "string", "format": "date",
+          "description": "date of acceptance by issuer"
+        },
+        "start": {
+          "type": "string", "format": "date",
+          "description": "start of investment (e.g. start of dividend-period)"
+        },
+        "end": {
+          "type": "string", "format": "date",
+          "description": "end of investment"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/xpectofield"
+          }
+        },
+        "customer": {
+          "$ref": "#/%24defs/customer"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/event"
+          }
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/property"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/customfield"
+          }
+        },
+        "customobjects": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/customobject"
+          }
+        },
+        "key": {
+          "$ref": "person.001.json#/%24defs/key"
+        },
+        "modified": {
+          "type": "string", "format": "date-time"
+        }
+      }
+    },
+    "investmenttype": {
+      "type": "integer",
+      "enum": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+    },
+    "rangeofexperience": {
+      "type": "string",
+      "enum": ["lower than 3 years", "3 to 5 years", "greater than 5 years", "undefined"]
+    },
+    "investmentexperience": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "type": {
+          "$refs": "#/%24defs/investmenttype"
+        },
+        "knowledge": {
+          "type": "boolean"
+        },
+        "experience": {
+          "$refs": "#/%24defs/rangeofexperience"
+        }
+      }
+    },
+    "servicetype": {
+      "type": "integer",
+      "description": "0 independent, 1 investment_consultancy, 2 investment_management",
+      "enum": [ 0, 1, 2 ]
+    },
+    "serviceexperience": {
+      "type": "object",
+      "required": [],
+      "properties": {
+        "type": {
+          "$ref": "#/%24defs/servicetype"
+        },
+        "experience": {
+          "$ref": "#/%24defs/rangeofexperience"
+        }
+      }
+    },
+    "avgyearlytransactionstype": {
+      "type": "integer",
+      "description": "0 noTrans, 5 lower_5_Trans, 10 bet_5_to_10_Trans, 11 more_than_10_Trans",
+      "enum": [ 0, 5, 10, 11 ]
+    },
+    "avgtransactionvaluetype": {
+      "type": "integer",
+      "description": "3000 lower_3000, 5000 bet_3000_to_5000, 10000 bet_5000_to_10000, 10001 over_10000",
+      "enum": [ 3000, 5000, 10000, 10001 ]
+    },
+    "customer": {
+      "type": "object",
+      "required": [ "person", "key", "modified" ],
+      "properties": {
+        "pwd": {
+          "$ref": "person.001.json#/%24defs/string"
+        },
+        "userid": {
+          "description": "userid, for webportal, emailpriv is used if omitted or empty",
+          "$ref": "person.001.json#/%24defs/string"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/xpectofield"
+          }
+        },
+        "person": {
+          "$ref": "person.001.json#/%24defs/person"
+        },
+        "investmentsurveys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [ "date", "key", "modified" ],
+            "properties": {
+              "date": {
+                "type": "string", "format": "date"
+              },
+              "investmentexperiences": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/%24defs/investmentexperience"
+                }
+              },
+              "serviceexperiences": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/%24defs/serviceexperience"
+                }
+              },
+              "avgyearlytransactions": {
+                "$ref": "#/%24defs/avgyearlytransactionstype"
+              },
+              "avgtransactionvalue": {
+                "$ref": "#/%24defs/avgtransactionvaluetype"
+              },
+              "xpectofields": {
+                "type": "array",
+                "items": {
+                  "$ref": "person.001.json#/%24defs/xpectofield"
+                }
+              },
+              "customfields": {
+                "type": "array",
+                "items": {
+                  "$ref": "person.001.json#/%24defs/customfield"
+                }
+              },
+              "key": {
+                "$ref": "person.001.json#/%24defs/key"
+              },
+              "modified": {
+                "type": "string", "format": "date-time"
+              }
+            }
+          }
+        },
+        "event": {
+          "$refs": "person.001.json#/%24defs/event"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/property"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/customfield"
+          }
+        },
+        "customobjects": {
+          "type": "array",
+          "items": {
+            "$ref": "person.001.json#/%24defs/customobject"
+          }
+        },
+        "key": {
+          "$ref": "person.001.json#/%24defs/key"
+        },
+        "modified": {
+          "type": "string", "format": "date-time"
+        }
+      }
+    }
+  }
+} 

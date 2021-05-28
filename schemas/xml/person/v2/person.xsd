@@ -386,7 +386,7 @@
 			<xs:element name="phone" type="string" minOccurs="0" maxOccurs="2" />
 			<xs:element name="web" type="string" minOccurs="0" />
 					
-			<xs:element name="maritalstatus" type="martialstatus" minOccurs="0"  />
+			<xs:element name="martialstatus" type="martialstatus" minOccurs="0"  />
 			<xs:element name="education" type="string" minOccurs="0" />
 			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>

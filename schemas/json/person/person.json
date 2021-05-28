@@ -1,0 +1,651 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "type": "object",
+  "$defs": {
+    "decimalunsigned": {
+      "type": "number",
+      "minLength": 0
+    },
+    "string": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "xpectofield": {
+      "description": "additional data, which can be added and is mapped to the fields from xpecto",
+      "type": "object",
+      "required": [ "fieldid", "value" ],
+      "properties": {
+        "fieldid": {
+          "$ref": "#/%24defs/string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "memo": {
+      "type": "string"
+    },
+    "key": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 50,
+      "pattern": "[a-zA-Z0-9_+-]+"
+    },
+    "customfield": {
+      "type": "object",
+      "required": [ "name", "value" ],
+      "properties": {
+        "name": {
+          "$ref": "#/%24defs/string"
+        },
+        "value": {
+          "$ref": "#/%24defs/memo"
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "required": [ "date", "category", "public", "key", "modified" ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "category": {
+          "description": "category or class of event",
+          "$ref": "#/%24defs/string"
+        },
+        "subject": {
+          "$ref": "#/%24defs/string"
+        },
+        "file": {
+          "$ref": "#/%24defs/string",
+          "description": "filename without path, every file needs to be included with this filename into zip-archive"
+        },
+        "public": {
+          "type": "boolean",
+          "description": "customer is able to see event in webportal"
+        },
+        "comment": {
+          "$ref": "#/%24defs/memo"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/xpectofield"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "customobject": {
+      "type": "object",
+      "required": [ "entity", "customfields", "key", "modified" ],
+      "properties": {
+        "entity": {
+          "$ref": "#/%24defs/key"
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          },
+          "minItems": 1
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "property": {
+      "type": "object",
+      "required": [ "date", "property", "public", "key", "modified" ],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "property": {
+          "type": "string",
+          "description": "name of property e.g.\"AGB\" for acknowledging AGB during signing process"
+        },
+        "public": {
+          "type": "boolean",
+          "description": "customer is able to see property in webportal"
+        },
+        "validfrom": {
+          "type": "string",
+          "format": "date"
+        },
+        "validuntil": {
+          "type": "string",
+          "format": "date"
+        },
+        "comment": {
+          "$ref": "#/%24defs/memo"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/xpectofield"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "persontype": {
+      "type": "integer",
+      "description": "0 natural_person, 1 legal_person, 2 marriage, 3 inheritance, 9 other_org",
+      "enum": [ 0, 1, 2, 3, 9 ]
+    },
+    "country": {
+      "description": "2 letter iso-code for country e.g. DE for germany",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2,
+      "pattern": "[A-Z]{2}"
+    },
+    "maritalstatus": {
+      "type": "integer",
+      "description": "0 single, 1 married, 11 indivorce, 12 divorced, 13 widowed, 20 civilpartnership, 22 suspendedcivilpartnership, 23 partnerdeceased, 99 unknwon",
+      "enum": [ 0, 1, 11, 12, 13, 20, 22, 23, 99 ]
+    },
+    "currency": {
+      "description": "3 letter iso-code for currency e.g. USD for US-Dollar",
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 3,
+      "pattern": "[A-Z]{3}"
+    },
+    "bankaccounttype": {
+      "type": "integer",
+      "description": "0 bankaccount; 1 investmentaccount",
+      "enum": [ 0, 1 ]
+    },
+    "bankaccountusagetype": {
+      "type": "integer",
+      "description": "0 invest; 8 dividends_interest; 9 divest; 10 commission; 16 securitiestransfer",
+      "enum": [ 0, 8, 9, 10, 16 ]
+    },
+    "bankaccount": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [ "iban" ],
+          "properties": {
+            "iban": {
+              "$ref": "#/%24defs/string"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [ "portfolionumber" ],
+          "properties": {
+            "portfolionumber": {
+              "$ref": "#/%24defs/string"
+            }
+          }
+        }
+      ],
+      "required": [ "accountholder", "country", "currency", "sharedaccount", "type", "key", "modified" ],
+      "properties": {
+        "accountholder": {
+          "$ref": "#/%24defs/string"
+        },
+        "bic": {
+          "$ref": "#/%24defs/string"
+        },
+        "bank": {
+          "$ref": "#/%24defs/string"
+        },
+        "country": {
+          "$ref": "#/%24defs/country"
+        },
+        "currency": {
+          "$ref": "#/%24defs/currency"
+        },
+        "sharedaccount": {
+          "type": "boolean",
+          "description": "true if account is shared by multiple persons, e.g. a couple"
+        },
+        "type": {
+          "$ref": "#/%24defs/bankaccounttype"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/xpectofield"
+          }
+        },
+        "usages": {
+          "type": "array",
+          "description": "how the bankaccount should be used by the issuer in reference to this contract",
+          "items": {
+            "type": "object",
+            "required": [ "types", "key", "modified" ],
+            "properties": {
+              "types": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/%24defs/bankaccountusagetype"
+                },
+                "minItems": 1
+              }
+            },
+            "mandate": {
+              "type": "object",
+              "description": "mandate information for direct debit if signed",
+              "required": [ "signed" ],
+              "properties": {
+                "signed": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "reference": {
+                  "$ref": "#/%24defs/string"
+                }
+              }
+            },
+            "validfrom": {
+              "type": "string",
+              "format": "date"
+            },
+            "validuntil": {
+              "type": "string",
+              "format": "date"
+            },
+            "forallcontractsofproduct": {
+              "description": "On the xpecto datastructure usages can be used per contract or per product, this flag indicates that the usage is used for all contracts off the products. If there are usages per controct, only contract usages will be considered",
+              "type": "boolean"
+            },
+            "xpectofields": {
+              "type": "array",
+              "items": {
+                "$ref": "#/%24defs/xpectofield"
+              }
+            },
+            "customfields": {
+              "type": "array",
+              "items": {
+                "$ref": "#/%24defs/customfield"
+              }
+            },
+            "key": {
+              "$ref": "#/%24defs/key"
+            },
+            "modified": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "wallet": {
+      "type": "object",
+      "required": [ "walletholder", "currency", "walletaddress", "key", "modified" ],
+      "properties": {
+        "walletholder": {
+          "$ref": "#/%24defs/string"
+        },
+        "currency": {
+          "$ref": "#/%24defs/string"
+        },
+        "walletaddress": {
+          "$ref": "#/%24defs/string"
+        },
+        "blockchain": {
+          "$ref": "#/%24defs/string"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/xpectofield"
+          }
+        },
+        "usages": {
+          "type": "array",
+          "description": "how the bankaccount should be used by the issuer in reference to this contract",
+          "items": {
+            "type": "object",
+            "required": [ "types", "key", "modified" ],
+            "properties": {
+              "types": {
+                "type": "array",
+                "description": "there needs to be at least one usage type for every bankaccount, e.g. 8 for dividends",
+                "items": {
+                  "$ref": "#/%24defs/bankaccountusagetype"
+                },
+                "minItems": 1
+              },
+              "validfrom": {
+                "type": "string",
+                "format": "date"
+              },
+              "validuntil": {
+                "type": "string",
+                "format": "date"
+              },
+              "forallcontractsofproduct": {
+                "description": "On the xpecto datastructure usages can be used per contract or per product, this flag indicates that the usage is used for all contracts off the products. If there are usages per controct, only contract usages will be considered",
+                "type": "boolean"
+              },
+              "xpectofields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/%24defs/xpectofield"
+                }
+              },
+              "customfields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/%24defs/customfield"
+                }
+              },
+              "key": {
+                "$ref": "#/%24defs/key"
+              },
+              "modified": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "identdocumenttype": {
+      "type": "integer",
+      "description": "0 idcard, 1 passport",
+      "enum": [ 0, 1 ]
+    },
+    "identservicetype": {
+      "type": "integer",
+      "description": "0 investmentprovider ,1 affiliate ,2 postident ,3 bank ,4 notary ,5 onlineident ,8 affiliate34dGewO, 15 invalid",
+      "enum": [ 0, 1, 2, 3, 4, 5, 8, 15 ]
+    },
+    "identification": {
+      "type": "object",
+      "required": [ "documentnr", "issuer", "validuntil", "validfrom", "documenttype", "submitted", "key", "modified" ],
+      "properties": {
+        "documentnr": {
+          "$ref": "#/%24defs/string"
+        },
+        "documenttype": {
+          "$ref": "#/%24defs/identdocumenttype"
+        },
+        "validfrom": {
+          "type": "string",
+          "format": "date"
+        },
+        "validuntil": {
+          "$ref": "#/%24defs/string"
+        },
+        "issuer": {
+          "$ref": "#/%24defs/string"
+        },
+        "verifieds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/identservicetype"
+          }
+        },
+        "submitted": {
+          "description": "timestamp from ident-service",
+          "type": "string",
+          "format": "date"
+        },
+        "code": {
+          "description": "code or transaction from ident-service",
+          "$ref": "#/%24defs/string"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/xpectofield"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "personroletype": {
+      "type": "integer",
+      "description": "50 spouse, 51 shareholder, 52 heritage, 60 controlling_person, 70 director, 71 ceo, 72 board_chairman, 72 board_member",
+      "enum": [ 50, 51, 52, 60, 70, 71, 72, 72 ]
+    },
+    "person": {
+      "type": "object",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [ "companyname" ],
+          "properties": {
+            "companyname": { "$ref": "#/%24defs/string" },
+            "salutation": { "$ref": "#/%24defs/string" },
+            "title": { "$ref": "#/%24defs/string" },
+            "forename": { "$ref": "#/%24defs/string" },
+            "surname": { "$ref": "#/%24defs/string" }
+          }
+
+        },
+        {
+          "type": "object",
+          "required": [ "salutation", "forename", "surname" ],
+          "properties": {
+            "salutation": { "$ref": "#/%24defs/string" },
+            "title": { "$ref": "#/%24defs/string" },
+            "forename": { "$ref": "#/%24defs/string" },
+            "surname": { "$ref": "#/%24defs/string" }
+          }
+        }
+      ],
+      "required": [ "type", "street", "zip", "city", "country", "key", "modified" ],
+      "properties": {
+        "type": {
+          "$ref": "#/%24defs/persontype"
+        },
+        "street": {
+          "$ref": "#/%24defs/string"
+        },
+        "zip": {
+          "$ref": "#/%24defs/string"
+        },
+        "city": {
+          "$ref": "#/%24defs/string"
+        },
+        "country": {
+          "$ref": "#/%24defs/country"
+        },
+        "birthdate": {
+          "type": "string",
+          "format": "date"
+        },
+        "birthplace": {
+          "$ref": "#/%24defs/string"
+        },
+        "birthcountry": {
+          "$ref": "#/%24defs/string"
+        },
+        "position": {
+          "$ref": "#/%24defs/string"
+        },
+        "emailpriv": {
+          "$ref": "#/%24defs/string",
+          "description": "main, private mailaddress for person, used as userid if contract.customer.userid is not specified"
+        },
+        "mobilepriv": {
+          "$ref": "#/%24defs/string"
+        },
+        "phonepriv": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/string"
+          },
+          "maxItems": 2
+        },
+        "webpriv": {
+          "$ref": "#/%24defs/string"
+        },
+        "email": {
+          "$ref": "#/%24defs/string"
+        },
+        "mobile": {
+          "$ref": "#/%24defs/string"
+        },
+        "phone": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/string"
+          },
+          "maxItems": 2
+        },
+        "web": {
+          "$ref": "#/%24defs/string"
+        },
+        "maritalstatus": {
+          "$ref": "#/%24defs/maritalstatus"
+        },
+        "education": {
+          "$ref": "#/%24defs/string"
+        },
+        "xpectofields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/xpectofield"
+          }
+        },
+        "bankaccounts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/bankaccount"
+          }
+        },
+        "wallets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/wallet"
+          }
+        },
+        "identifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/identification"
+          }
+        },
+        "subpersons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "if a customer consists of multiple persons you should supply subpersons including their role e.g. a marriage consists of two spouses or a company has a director and a controlling_person",
+            "required": [ "role", "person" ],
+            "properties": {
+              "role": {
+                "$ref": "#/%24defs/personroletype"
+              },
+              "person": {
+                "$ref": "#/%24defs/person"
+              }
+            }
+          }
+        },
+        "event": {
+          "$ref": "#/%24defs/event"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/property"
+          }
+        },
+        "customfields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customfield"
+          }
+        },
+        "customobjects": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/customobject"
+          }
+        },
+        "key": {
+          "$ref": "#/%24defs/key"
+        },
+        "modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
