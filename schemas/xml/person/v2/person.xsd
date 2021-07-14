@@ -62,7 +62,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	
-	<xs:simpleType name="martialstatus">
+	<xs:simpleType name="maritalstatus">
 		<xs:restriction base="xs:unsignedByte">
 			<xs:enumeration value="0" id="single"/>
 			<xs:enumeration value="1" id="married"/>
@@ -370,6 +370,8 @@
 			<xs:element name="birthdate" type="xs:date" minOccurs="0" />
 			<xs:element name="birthplace" type="string" minOccurs="0" />
 			<xs:element name="birthcountry" type="string" minOccurs="0" />
+			<xs:element name="nationality" type="string" minOccurs="0" />
+			<xs:element name="furthernationality" type="string" minOccurs="0" maxOccurs="5" />
 			<xs:element name="position" type="string" minOccurs="0" />
 
 			<xs:element name="emailpriv" type="string" minOccurs="0">
@@ -386,7 +388,7 @@
 			<xs:element name="phone" type="string" minOccurs="0" maxOccurs="2" />
 			<xs:element name="web" type="string" minOccurs="0" />
 					
-			<xs:element name="martialstatus" type="martialstatus" minOccurs="0"  />
+			<xs:element name="maritalstatus" type="maritalstatus" minOccurs="0"  />
 			<xs:element name="education" type="string" minOccurs="0" />
 			<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="bankaccount" minOccurs="0" maxOccurs="unbounded" type="bankaccount"/>

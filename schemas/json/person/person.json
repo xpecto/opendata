@@ -535,6 +535,16 @@
         "birthcountry": {
           "$ref": "#/%24defs/string"
         },
+        "nationality": {
+          "$ref": "#/%24defs/string"
+        },
+        "furthernationalities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/%24defs/string"
+          },
+          "maxItems": 5
+        },
         "position": {
           "$ref": "#/%24defs/string"
         },
