@@ -274,7 +274,7 @@
 		<xs:sequence>
 			<xs:element name="documentnr" type="string" />
 			<xs:element name="documenttype" type="identdocumenttype" />
-			<xs:element name="validfrom" type="xs:date" />
+			<xs:element name="validfrom" type="xs:date" minOccurs="0" />
 			<xs:element name="validuntil" type="xs:date" />
 			<xs:element name="issuer" type="string" />
 			<xs:element name="verified" type="identservicetype" minOccurs="0"/>

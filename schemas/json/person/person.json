@@ -423,7 +423,7 @@
     },
     "identification": {
       "type": "object",
-      "required": [ "documentnr", "issuer", "validuntil", "validfrom", "documenttype", "submitted", "key", "modified" ],
+      "required": [ "documentnr", "issuer", "validuntil", "documenttype", "submitted", "key", "modified" ],
       "properties": {
         "documentnr": {
           "$ref": "#/%24defs/string"
