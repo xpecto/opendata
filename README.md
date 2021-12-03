@@ -24,22 +24,22 @@ The customer should choose which data he wants to share with the new platform.
 
 ## user journey
 
-The user can invoke the profile sharing with a known process:
+The user starts the profile sharing with a known process:
 
-- user visits new platform and want to sign up
+- user visits the new platform and wants to sign up
 - user clicks on "Login with PLATFORM" Button
 - user is forwarded to foreign platform and logs in
-- user gives consent to share his data
-- data will be transmitted securely with requesting platform
+- user gives consent to share his data (and selects the bits he wants to share)
+- data will be transmitted securely to requesting platform
 - customer is automatically registered and does not need to enter or legitimate on new platform
 
 Platforms need to agree on biliteral agreements to allow customers to share their profiles.
 Platforms need to exchange keys in order to setup secure data flow.
-We suggest to pay 5-15€ per new Profile shared between platforms which includes a valid legitimation. 
+We suggest to pay 5-15€ per new profile shared between platforms which includes a valid legitimation. 
 
 ### control flow
 
-We suggest to user the Authorization code flow described here https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth
+We suggest to use the Authorization code flow described here https://openid.net/specs/openid-connect-core-1_0.html#CodeFlowAuth
 
 ### scopes/claims possible profile data on OpenID-Connect 
 
@@ -49,6 +49,6 @@ We suggest to use the following custom-scopes and claims:
 - email (mandatory, see https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)
 - email_verifed (mandatory, see https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)
 - opendata_person (mandatory)
-   A opendata_person json property is added to the response of the userinfo-request. The data provided aligns with the person.json Schema defined by the opendata-specification above. The supplied person-data should include all the data, the customer wanted to share. Minimum would be address & contactinfo. Legitimation and Bank accounts/Wallets would be perfect for a seamless user experience.
+   A opendata_person json property is added to the response of the userinfo-request. The data provided aligns with the person.json Schema defined by the opendata-specification above. The supplied person-data should include all the bits, the customer wanted to share. Minimum would be address & contact info. Legitimation and Bank accounts/Wallets would be perfect for a seamless user experience.
 
 
