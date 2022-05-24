@@ -6,7 +6,7 @@
 		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
 		   elementFormDefault="qualified">
 
-	<xs:include schemaLocation="https://raw.githubusercontent.com/xpecto/opendata/v2/schemas/person/v2/person.xsd"/>
+	<xs:include schemaLocation="https://raw.githubusercontent.com/xpecto/opendata/master/schemas/xml/person/v2/person.xsd"/>
 
 	<xs:element name="affiliates">
 		<xs:complexType>
