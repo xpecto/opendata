@@ -479,8 +479,8 @@
     },
     "personroletype": {
       "type": "integer",
-      "description": "50 spouse, 51 shareholder, 52 heritage, 60 controlling_person, 70 director, 71 ceo, 72 board_chairman, 72 board_member",
-      "enum": [ 50, 51, 52, 60, 70, 71, 72, 72 ]
+      "description": "50 spouse, 51 shareholder, 52 heritage, 60 controlling_person, 70 director, 71 ceo, 72 board_chairman, 73 board_member",
+      "enum": [ 50, 51, 52, 60, 70, 71, 72, 73 ]
     },
     "person": {
       "type": "object",
