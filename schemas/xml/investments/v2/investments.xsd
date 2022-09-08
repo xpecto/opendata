@@ -111,17 +111,17 @@
 						<xs:documentation>code for campaign</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="agio" type="decimalunsigned" minOccurs="0">
+				<xs:element name="agio" type="xs:decimal" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>amount of agio in product-currency</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="agiodiscountaf" type="decimalunsigned" minOccurs="0">
+				<xs:element name="agiodiscountaf" type="xs:decimal" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>amount of agio discounted by affiliate in product-currency</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="share" type="decimalunsigned">
+				<xs:element name="share" type="xs:decimal">
 					<xs:annotation>
 						<xs:documentation>value of contract in product-currency</xs:documentation>
 					</xs:annotation>

@@ -40,15 +40,15 @@
           "description": "code for campaign"
         },
         "agio": {
-          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "type": "number",
           "description": "amount of agio in product-currency"
         },
         "agiodiscountaf": {
-          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "type": "number",
           "description": "amount of agio discounted by affiliate in product-currency"
         },
         "share": {
-          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "type": "number",
           "description": "value of contract in product-currency"
         },
         "units": {
