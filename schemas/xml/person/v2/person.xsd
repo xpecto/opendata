@@ -51,14 +51,19 @@
 
 	<xs:simpleType name="personroletype">
 		<xs:restriction base="xs:unsignedByte">
-			<xs:enumeration value="50" id="spouse"/>
-			<xs:enumeration value="51" id="shareholder"/>
-			<xs:enumeration value="52" id="heritage"/>
-			<xs:enumeration value="60" id="controlling_person"/>
-			<xs:enumeration value="70" id="director"/>
-			<xs:enumeration value="71" id="ceo"/>
-			<xs:enumeration value="72" id="board_chairman"/>
-			<xs:enumeration value="73" id="board_member"/>
+			<xs:annotation>
+				<xs:documentation>
+					Default roles which every system must allow to import. Other roles are custome:
+					50 - spouse
+					51 - shareholder
+					52 - heritage
+					60 - controlling_person
+					70 - director
+					71 - ceo
+					72 - board_chairman
+					73 - board_member
+				</xs:documentation>
+			</xs:annotation>
 		</xs:restriction>
 	</xs:simpleType>
 	
