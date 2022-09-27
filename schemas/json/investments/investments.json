@@ -8,7 +8,7 @@
       "items": {
         "$ref": "#/$defs/contract"
       },
-      "mitItems": 1
+      "minItems": 1
     },
     "customers": {
       "type": "array",
@@ -28,15 +28,15 @@
           "description": "productkey, needs to be synchronized with issuer e.g. \"TTF1\""
         },
         "contractno": {
-          "$ref": "person.001.json#/%24defs/string",
+          "$ref": "person.001.json#/$defs/string",
           "description": "number of contract as known by customer"
         },
         "affiliate": {
-          "$ref": "person.001.json#/%24defs/string",
+          "$ref": "person.001.json#/$defs/string",
           "description": "code identifies affiliate"
         },
         "campaign": {
-          "$ref": "person.001.json#/%24defs/string",
+          "$ref": "person.001.json#/$defs/string",
           "description": "code for campaign"
         },
         "agio": {
@@ -52,11 +52,11 @@
           "description": "value of contract in product-currency"
         },
         "units": {
-          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "$ref": "person.001.json#/$defs/decimalunsigned",
           "description": "number of units bought if product consists of shares or other parts"
         },
         "interestrate": {
-          "$ref": "person.001.json#/%24defs/decimalunsigned",
+          "$ref": "person.001.json#/$defs/decimalunsigned",
           "description": "percent of interest per year, can be ommited if product-setting is used"
         },
         "signed": {
@@ -78,38 +78,38 @@
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/xpectofield"
+            "$ref": "person.001.json#/$defs/xpectofield"
           }
         },
         "customer": {
-          "$ref": "#/%24defs/customer"
+          "$ref": "#/$defs/customer"
         },
         "events": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/event"
+            "$ref": "person.001.json#/$defs/event"
           }
         },
         "properties": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/property"
+            "$ref": "person.001.json#/$defs/property"
           }
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/customfield"
+            "$ref": "person.001.json#/$defs/customfield"
           }
         },
         "customobjects": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/customobject"
+            "$ref": "person.001.json#/$defs/customobject"
           }
         },
         "key": {
-          "$ref": "person.001.json#/%24defs/key"
+          "$ref": "person.001.json#/$defs/key"
         },
         "modified": {
           "type": "string", "format": "date-time"
@@ -129,13 +129,13 @@
       "required": [],
       "properties": {
         "type": {
-          "$refs": "#/%24defs/investmenttype"
+          "$refs": "#/$defs/investmenttype"
         },
         "knowledge": {
           "type": "boolean"
         },
         "experience": {
-          "$refs": "#/%24defs/rangeofexperience"
+          "$refs": "#/$defs/rangeofexperience"
         }
       }
     },
@@ -149,10 +149,10 @@
       "required": [],
       "properties": {
         "type": {
-          "$ref": "#/%24defs/servicetype"
+          "$ref": "#/$defs/servicetype"
         },
         "experience": {
-          "$ref": "#/%24defs/rangeofexperience"
+          "$ref": "#/$defs/rangeofexperience"
         }
       }
     },
@@ -171,20 +171,20 @@
       "required": [ "person", "key", "modified" ],
       "properties": {
         "pwd": {
-          "$ref": "person.001.json#/%24defs/string"
+          "$ref": "person.001.json#/$defs/string"
         },
         "userid": {
           "description": "userid, for webportal, emailpriv is used if omitted or empty",
-          "$ref": "person.001.json#/%24defs/string"
+          "$ref": "person.001.json#/$defs/string"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/xpectofield"
+            "$ref": "person.001.json#/$defs/xpectofield"
           }
         },
         "person": {
-          "$ref": "person.001.json#/%24defs/person"
+          "$ref": "person.001.json#/$defs/person"
         },
         "investmentsurveys": {
           "type": "array",
@@ -198,35 +198,35 @@
               "investmentexperiences": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/%24defs/investmentexperience"
+                  "$ref": "#/$defs/investmentexperience"
                 }
               },
               "serviceexperiences": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/%24defs/serviceexperience"
+                  "$ref": "#/$defs/serviceexperience"
                 }
               },
               "avgyearlytransactions": {
-                "$ref": "#/%24defs/avgyearlytransactionstype"
+                "$ref": "#/$defs/avgyearlytransactionstype"
               },
               "avgtransactionvalue": {
-                "$ref": "#/%24defs/avgtransactionvaluetype"
+                "$ref": "#/$defs/avgtransactionvaluetype"
               },
               "xpectofields": {
                 "type": "array",
                 "items": {
-                  "$ref": "person.001.json#/%24defs/xpectofield"
+                  "$ref": "person.001.json#/$defs/xpectofield"
                 }
               },
               "customfields": {
                 "type": "array",
                 "items": {
-                  "$ref": "person.001.json#/%24defs/customfield"
+                  "$ref": "person.001.json#/$defs/customfield"
                 }
               },
               "key": {
-                "$ref": "person.001.json#/%24defs/key"
+                "$ref": "person.001.json#/$defs/key"
               },
               "modified": {
                 "type": "string", "format": "date-time"
@@ -235,28 +235,28 @@
           }
         },
         "event": {
-          "$refs": "person.001.json#/%24defs/event"
+          "$refs": "person.001.json#/$defs/event"
         },
         "properties": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/property"
+            "$ref": "person.001.json#/$defs/property"
           }
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/customfield"
+            "$ref": "person.001.json#/$defs/customfield"
           }
         },
         "customobjects": {
           "type": "array",
           "items": {
-            "$ref": "person.001.json#/%24defs/customobject"
+            "$ref": "person.001.json#/$defs/customobject"
           }
         },
         "key": {
-          "$ref": "person.001.json#/%24defs/key"
+          "$ref": "person.001.json#/$defs/key"
         },
         "modified": {
           "type": "string", "format": "date-time"
