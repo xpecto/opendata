@@ -4,7 +4,7 @@
   "$defs": {
     "decimalunsigned": {
       "type": "number",
-      "minLength": 0
+      "minimum": 0
     },
     "string": {
       "type": "string",
@@ -16,7 +16,7 @@
       "required": [ "fieldid", "value" ],
       "properties": {
         "fieldid": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "value": {
           "type": "string"
@@ -37,10 +37,10 @@
       "required": [ "name", "value" ],
       "properties": {
         "name": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "value": {
-          "$ref": "#/%24defs/memo"
+          "$ref": "#/$defs/memo"
         }
       }
     },
@@ -54,13 +54,13 @@
         },
         "category": {
           "description": "category or class of event",
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "subject": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "file": {
-          "$ref": "#/%24defs/string",
+          "$ref": "#/$defs/string",
           "description": "filename without path, every file needs to be included with this filename into zip-archive"
         },
         "public": {
@@ -68,22 +68,22 @@
           "description": "customer is able to see event in webportal"
         },
         "comment": {
-          "$ref": "#/%24defs/memo"
+          "$ref": "#/$defs/memo"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/xpectofield"
+            "$ref": "#/$defs/xpectofield"
           }
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           }
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
@@ -96,17 +96,17 @@
       "required": [ "entity", "customfields", "key", "modified" ],
       "properties": {
         "entity": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           },
           "minItems": 1
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
@@ -139,22 +139,22 @@
           "format": "date"
         },
         "comment": {
-          "$ref": "#/%24defs/memo"
+          "$ref": "#/$defs/memo"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/xpectofield"
+            "$ref": "#/$defs/xpectofield"
           }
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           }
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
@@ -204,7 +204,7 @@
           "required": [ "iban" ],
           "properties": {
             "iban": {
-              "$ref": "#/%24defs/string"
+              "$ref": "#/$defs/string"
             }
           }
         },
@@ -213,7 +213,7 @@
           "required": [ "portfolionumber" ],
           "properties": {
             "portfolionumber": {
-              "$ref": "#/%24defs/string"
+              "$ref": "#/$defs/string"
             }
           }
         }
@@ -221,31 +221,31 @@
       "required": [ "accountholder", "country", "currency", "sharedaccount", "type", "key", "modified" ],
       "properties": {
         "accountholder": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "bic": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "bank": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "country": {
-          "$ref": "#/%24defs/country"
+          "$ref": "#/$defs/country"
         },
         "currency": {
-          "$ref": "#/%24defs/currency"
+          "$ref": "#/$defs/currency"
         },
         "sharedaccount": {
           "type": "boolean",
           "description": "true if account is shared by multiple persons, e.g. a couple"
         },
         "type": {
-          "$ref": "#/%24defs/bankaccounttype"
+          "$ref": "#/$defs/bankaccounttype"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/xpectofield"
+            "$ref": "#/$defs/xpectofield"
           }
         },
         "usages": {
@@ -258,7 +258,7 @@
               "types": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/%24defs/bankaccountusagetype"
+                  "$ref": "#/$defs/bankaccountusagetype"
                 },
                 "minItems": 1
               }
@@ -273,7 +273,7 @@
                   "format": "date"
                 },
                 "reference": {
-                  "$ref": "#/%24defs/string"
+                  "$ref": "#/$defs/string"
                 }
               }
             },
@@ -292,17 +292,17 @@
             "xpectofields": {
               "type": "array",
               "items": {
-                "$ref": "#/%24defs/xpectofield"
+                "$ref": "#/$defs/xpectofield"
               }
             },
             "customfields": {
               "type": "array",
               "items": {
-                "$ref": "#/%24defs/customfield"
+                "$ref": "#/$defs/customfield"
               }
             },
             "key": {
-              "$ref": "#/%24defs/key"
+              "$ref": "#/$defs/key"
             },
             "modified": {
               "type": "string",
@@ -313,11 +313,11 @@
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           }
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
@@ -330,21 +330,21 @@
       "required": [ "walletholder", "currency", "walletaddress", "key", "modified" ],
       "properties": {
         "walletholder": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "currency": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "walletaddress": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "blockchain": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/xpectofield"
+            "$ref": "#/$defs/xpectofield"
           }
         },
         "usages": {
@@ -358,7 +358,7 @@
                 "type": "array",
                 "description": "there needs to be at least one usage type for every bankaccount, e.g. 8 for dividends",
                 "items": {
-                  "$ref": "#/%24defs/bankaccountusagetype"
+                  "$ref": "#/$defs/bankaccountusagetype"
                 },
                 "minItems": 1
               },
@@ -377,17 +377,17 @@
               "xpectofields": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/%24defs/xpectofield"
+                  "$ref": "#/$defs/xpectofield"
                 }
               },
               "customfields": {
                 "type": "array",
                 "items": {
-                  "$ref": "#/%24defs/customfield"
+                  "$ref": "#/$defs/customfield"
                 }
               },
               "key": {
-                "$ref": "#/%24defs/key"
+                "$ref": "#/$defs/key"
               },
               "modified": {
                 "type": "string",
@@ -399,11 +399,11 @@
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           }
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
@@ -426,25 +426,25 @@
       "required": [ "documentnr", "issuer", "validuntil", "documenttype", "submitted", "key", "modified" ],
       "properties": {
         "documentnr": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "documenttype": {
-          "$ref": "#/%24defs/identdocumenttype"
+          "$ref": "#/$defs/identdocumenttype"
         },
         "validfrom": {
           "type": "string",
           "format": "date"
         },
         "validuntil": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "issuer": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "verifieds": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/identservicetype"
+            "$ref": "#/$defs/identservicetype"
           }
         },
         "submitted": {
@@ -454,22 +454,22 @@
         },
         "code": {
           "description": "code or transaction from ident-service",
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/xpectofield"
+            "$ref": "#/$defs/xpectofield"
           }
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           }
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
@@ -488,11 +488,11 @@
           "type": "object",
           "required": [ "companyname" ],
           "properties": {
-            "companyname": { "$ref": "#/%24defs/string" },
-            "salutation": { "$ref": "#/%24defs/string" },
-            "title": { "$ref": "#/%24defs/string" },
-            "forename": { "$ref": "#/%24defs/string" },
-            "surname": { "$ref": "#/%24defs/string" }
+            "companyname": { "$ref": "#/$defs/string" },
+            "salutation": { "$ref": "#/$defs/string" },
+            "title": { "$ref": "#/$defs/string" },
+            "forename": { "$ref": "#/$defs/string" },
+            "surname": { "$ref": "#/$defs/string" }
           }
 
         },
@@ -500,114 +500,114 @@
           "type": "object",
           "required": [ "salutation", "forename", "surname" ],
           "properties": {
-            "salutation": { "$ref": "#/%24defs/string" },
-            "title": { "$ref": "#/%24defs/string" },
-            "forename": { "$ref": "#/%24defs/string" },
-            "surname": { "$ref": "#/%24defs/string" }
+            "salutation": { "$ref": "#/$defs/string" },
+            "title": { "$ref": "#/$defs/string" },
+            "forename": { "$ref": "#/$defs/string" },
+            "surname": { "$ref": "#/$defs/string" }
           }
         }
       ],
       "required": [ "type", "street", "zip", "city", "country", "key", "modified" ],
       "properties": {
         "type": {
-          "$ref": "#/%24defs/persontype"
+          "$ref": "#/$defs/persontype"
         },
         "street": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "zip": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "city": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "country": {
-          "$ref": "#/%24defs/country"
+          "$ref": "#/$defs/country"
         },
         "birthdate": {
           "type": "string",
           "format": "date"
         },
         "birthplace": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "birthcountry": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "nationality": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "furthernationalities": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/string"
+            "$ref": "#/$defs/string"
           },
           "maxItems": 5
         },
         "position": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "emailpriv": {
-          "$ref": "#/%24defs/string",
+          "$ref": "#/$defs/string",
           "description": "main, private mailaddress for person, used as userid if contract.customer.userid is not specified"
         },
         "mobilepriv": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "phonepriv": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/string"
+            "$ref": "#/$defs/string"
           },
           "maxItems": 2
         },
         "webpriv": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "email": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "mobile": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "phone": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/string"
+            "$ref": "#/$defs/string"
           },
           "maxItems": 2
         },
         "web": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "maritalstatus": {
-          "$ref": "#/%24defs/maritalstatus"
+          "$ref": "#/$defs/maritalstatus"
         },
         "education": {
-          "$ref": "#/%24defs/string"
+          "$ref": "#/$defs/string"
         },
         "xpectofields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/xpectofield"
+            "$ref": "#/$defs/xpectofield"
           }
         },
         "bankaccounts": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/bankaccount"
+            "$ref": "#/$defs/bankaccount"
           }
         },
         "wallets": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/wallet"
+            "$ref": "#/$defs/wallet"
           }
         },
         "identifications": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/identification"
+            "$ref": "#/$defs/identification"
           }
         },
         "subpersons": {
@@ -618,37 +618,37 @@
             "required": [ "role", "person" ],
             "properties": {
               "role": {
-                "$ref": "#/%24defs/personroletype"
+                "$ref": "#/$defs/personroletype"
               },
               "person": {
-                "$ref": "#/%24defs/person"
+                "$ref": "#/$defs/person"
               }
             }
           }
         },
         "event": {
-          "$ref": "#/%24defs/event"
+          "$ref": "#/$defs/event"
         },
         "properties": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/property"
+            "$ref": "#/$defs/property"
           }
         },
         "customfields": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customfield"
+            "$ref": "#/$defs/customfield"
           }
         },
         "customobjects": {
           "type": "array",
           "items": {
-            "$ref": "#/%24defs/customobject"
+            "$ref": "#/$defs/customobject"
           }
         },
         "key": {
-          "$ref": "#/%24defs/key"
+          "$ref": "#/$defs/key"
         },
         "modified": {
           "type": "string",
