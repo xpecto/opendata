@@ -441,7 +441,7 @@
         "issuer": {
           "$ref": "#/$defs/string"
         },
-        "verifieds": {
+        "verified": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/identservicetype"
