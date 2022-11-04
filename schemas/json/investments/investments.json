@@ -208,10 +208,10 @@
                 }
               },
               "avgyearlytransactions": {
-                "$ref": "#/$defs/avgyearlytransactionstype"
+                "$ref": "person.001.json#/$defs/integerunsigned"
               },
               "avgtransactionvalue": {
-                "$ref": "#/$defs/avgtransactionvaluetype"
+                "$ref": "person.001.json#/$defs/integerunsigned"
               },
               "xpectofields": {
                 "type": "array",

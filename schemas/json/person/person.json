@@ -6,6 +6,10 @@
       "type": "number",
       "minimum": 0
     },
+    "integerunsigned": {
+      "type": "integer",
+      "minimum": 0
+    },
     "string": {
       "type": "string",
       "maxLength": 250
@@ -413,8 +417,8 @@
     },
     "identdocumenttype": {
       "type": "integer",
-      "description": "0 idcard, 1 passport",
-      "enum": [ 0, 1 ]
+      "description": "0 idcard, 1 passport, 2 residence title, 3 temporary  idcard, 4 temporary passport, 5 convention travel document (for stateless persons), 6 convention travel document (for refugees), 7 convention travel document (passport for foreigners), 8 service passport, 9 diplomatic passport, 10 official passport (ministerial passport), 11 driving licence, 12 certificate of birth, 99 unknwon",
+      "enum": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 99 ]
     },
     "identservicetype": {
       "type": "integer",

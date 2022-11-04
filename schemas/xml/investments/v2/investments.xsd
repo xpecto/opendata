@@ -66,8 +66,27 @@
 						<xs:element name="date" type="xs:date" />
 						<xs:element name="investmentexperience" type="investmentexperience" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element name="serviceexperience" type="serviceexperience" minOccurs="0" maxOccurs="unbounded" />
-						<xs:element name="avgyearlytransactions" type="avgyearlytransactionstype" minOccurs="0" />
-						<xs:element name="avgtransactionvalue" type="avgtransactionvaluetype" minOccurs="0" />
+						<xs:annotation>
+							<xs:documentation>
+								default values:
+								value="0" id="noTrans"
+								value="5" id="lower_5_Trans"
+								value="10" id="bet_5_to_10_Trans"
+								value="11" id="more_than_10_Trans"
+								all positiv integeres inclusive 0 are allowed
+							</xs:documentation>
+						</xs:annotation>
+						<xs:element name="avgyearlytransactions" type="integerunsigned" minOccurs="0" />
+						<xs:annotation>
+							<xs:documentation>
+								default values:
+								value="3000" id="lower_3000"
+								value="5000" id="bet_3000_to_5000"
+								value="10000" id="bet_5000_to_10000"
+								value="10001" id="over_10000"
+							</xs:documentation>
+						</xs:annotation>
+						<xs:element name="avgtransactionvalue" type="integerunsigned" minOccurs="0" />
 						<xs:element name="xpectofield" type="xpectofield" minOccurs="0" maxOccurs="unbounded"/>
 						<xs:element name="customfield" type="customfield" minOccurs="0" maxOccurs="unbounded"/>
 					</xs:sequence>
@@ -221,24 +240,6 @@
 			<xs:enumeration value="lower than 3 years"/>
 			<xs:enumeration value="3 to 5 years"/>
 			<xs:enumeration value="greater than 5 years"/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name="avgyearlytransactionstype">
-		<xs:restriction base="xs:integer">
-			<xs:enumeration value="0" id="noTrans"/>
-			<xs:enumeration value="5" id="lower_5_Trans"/>
-			<xs:enumeration value="10" id="bet_5_to_10_Trans"/>
-			<xs:enumeration value="11" id="more_than_10_Trans"/>
-		</xs:restriction>
-	</xs:simpleType>
-
-	<xs:simpleType name="avgtransactionvaluetype">
-		<xs:restriction base="xs:integer">
-			<xs:enumeration value="3000" id="lower_3000"/>
-			<xs:enumeration value="5000" id="bet_3000_to_5000"/>
-			<xs:enumeration value="10000" id="bet_5000_to_10000"/>
-			<xs:enumeration value="10001" id="over_10000"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
