@@ -98,18 +98,18 @@
 		<xs:restriction base="xs:unsignedByte">
 			<xs:enumeration value="0" id="idcard"/>
 			<xs:enumeration value="1" id="passport"/>
-			<xs:enumeration value="2" id="residence title"/>
-			<xs:enumeration value="3" id="temporary  idcard"/>
-			<xs:enumeration value="4" id="temporary passport"/>
-			<xs:enumeration value="5" id="convention travel document (for stateless persons)"/>
-			<xs:enumeration value="6" id="convention travel document (for refugees)"/>
-			<xs:enumeration value="7" id="convention travel document (passport for foreigners)"/>
-			<xs:enumeration value="8" id="service passport"/>
-			<xs:enumeration value="9" id="diplomatic passport"/>
-			<xs:enumeration value="10" id="official passport (ministerial passport)"/>
-			<xs:enumeration value="11" id="driving licence"/>
-			<xs:enumeration value="12" id="certificate of birth"/>
-			<xs:enumeration value="99" id="unknwon"/>
+			<xs:enumeration value="2" id="residence_title"/>
+			<xs:enumeration value="3" id="temporary_idcard"/>
+			<xs:enumeration value="4" id="temporary_passport"/>
+			<xs:enumeration value="5" id="convention_travel_document_for_stateless_persons"/>
+			<xs:enumeration value="6" id="convention_travel_document_for_refugees"/>
+			<xs:enumeration value="7" id="convention_travel_document_passport_for_foreigners"/>
+			<xs:enumeration value="8" id="service_passport"/>
+			<xs:enumeration value="9" id="diplomatic_passport"/>
+			<xs:enumeration value="10" id="official_passport_ministerial_passport"/>
+			<xs:enumeration value="11" id="driving_licence"/>
+			<xs:enumeration value="12" id="certificate_of_birth"/>
+			<xs:enumeration value="99" id="unknown"/>
 		</xs:restriction>
 	</xs:simpleType>
 
