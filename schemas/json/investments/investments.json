@@ -129,13 +129,13 @@
       "required": [],
       "properties": {
         "type": {
-          "$refs": "#/$defs/investmenttype"
+          "$ref": "#/$defs/investmenttype"
         },
         "knowledge": {
           "type": "boolean"
         },
         "experience": {
-          "$refs": "#/$defs/rangeofexperience"
+          "$ref": "#/$defs/rangeofexperience"
         }
       }
     },
@@ -235,7 +235,7 @@
           }
         },
         "event": {
-          "$refs": "person.001.json#/$defs/event"
+          "$ref": "person.001.json#/$defs/event"
         },
         "properties": {
           "type": "array",
